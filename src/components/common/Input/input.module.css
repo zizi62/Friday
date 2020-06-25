@@ -1,0 +1,25 @@
+.input {
+    padding: 6px 12px;
+    border: 2px solid #09024F;
+    background-color: #3EA294;
+    color:  #09024F;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 3px;
+    outline: none;
+    margin: 8px;
+}
+
+.inputError{
+    border: 2px solid red;
+    color: red;
+}
+
+.error{
+    display: block;
+    color: red;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 12px;
+    margin-top: 6px;
+}

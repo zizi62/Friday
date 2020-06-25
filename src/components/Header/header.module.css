@@ -1,0 +1,19 @@
+
+.wraper{
+
+}
+
+
+.header{
+    padding: 20px;
+    background-color: #09024F;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.link{
+    font-weight: bold;
+    color:#ffff;
+    text-decoration: none;
+}
