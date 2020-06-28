@@ -4,7 +4,7 @@ import { profileReducer } from "./profileReducer";
 import { forgotPasswordReducer } from "./forgotPasswordReducer";
 import { registrationReducer } from "./registrationReducer";
 import { setNewPasswordReducer } from "./setNewPasswordReducer";
-import { signInReducer } from "./sighInReducer";
+import { signInReducer } from "./signInReducer";
 
 
 const rootReducer = combineReducers({

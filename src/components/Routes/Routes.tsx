@@ -2,9 +2,9 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import RegistrationContainer from '../RegistrationPage/Registration/RegistrationContainer'
 import SetNewPasswordContainer from '../SetNewPasswordPage/SetNewPasswordContainer'
-import ProfileContainer from '../ProfilePage/Profile/ProfileContainer'
 import ForgotPasswordPage from '../ForgotPasswordPage/ForgotPasswordPage'
 import SignInPage from '../SignInPage/SignInPage'
+import ProfilePage from '../ProfilePage/ProfilePage'
 
 
 export const SIGN_IN_PATH = '/sign-in';
@@ -20,7 +20,7 @@ const Routes:React.FC = () =>{
         <Route path={REGISTER_PATH} component={RegistrationContainer} />
         <Route path = {FORGOT_PASSWORD_PATH} component = {ForgotPasswordPage}/>
         <Route path = {SET_NEW_PASSWORD_PATH } component = {SetNewPasswordContainer}/>
-        <Route path = {PROFILE_PATH} component = {ProfileContainer}/>
+        <Route path = {PROFILE_PATH} component = {ProfilePage}/>
     </>
 
 }
