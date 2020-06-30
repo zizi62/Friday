@@ -10,6 +10,7 @@ type SignInPropsType = {
     email : string | undefined
     password: string | undefined
     rememberMe: boolean
+    error: string | undefined
     setEmail : (e: ChangeEvent<HTMLInputElement>)=> void
     setPassword : (e: ChangeEvent<HTMLInputElement>)=>void
     setRememberMe : (e: ChangeEvent<HTMLInputElement>)=> void
@@ -19,11 +20,11 @@ type SignInPropsType = {
 
 const SignIn: React.FC<SignInPropsType> = (props) => {
 
-const {email, password, rememberMe , setEmail, setPassword, setRememberMe, signIn} = props
+const {email, password, rememberMe,error, setEmail, setPassword, setRememberMe, signIn} = props
 
     return <div className={style.signIn}>
-        <Input placeholder='email' type = 'email' onChange ={setEmail} value={email} />
-        <Input type = 'password'  placeholder='password' onChange ={setPassword} value={password}/>
+        <Input placeholder='email' type = 'email' onChange ={setEmail} value={email} error={error}/>
+        <Input type = 'password'  placeholder='password' onChange ={setPassword} value={password} error={error}/>
         <Input type = 'checkbox' onChange ={setRememberMe} checked={rememberMe}/>  
         <span>Remember Me</span>
         <Button onClick = {signIn}>SIGN IN</Button>

@@ -15,7 +15,7 @@ export  const getToken = () => localStorage.getItem('token')
 export const profileApi = {   
 
     async getProfile(token: string) {
-        debugger
+
         let response = await instance.post(`auth/me`, {token})
         return response.data
     }

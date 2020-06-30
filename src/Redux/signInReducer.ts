@@ -24,50 +24,38 @@ export const signInReducer = (state: InitialStateType = initialState, action: Ac
       return {
         ...state,
         error: action.error
-      }  
-       default: return state
+      }
+    default: return state
   }
 }
 
 type ActionType = setAuthSuccessActionType | setErrorActionType
 
-type setAuthSuccessActionType = { 
-  type: typeof IS_AUTH_SUCCESS 
-  isAuth: boolean 
-  error: string 
+type setAuthSuccessActionType = {
+  type: typeof IS_AUTH_SUCCESS
+  isAuth: boolean
+  error: string
 }
 type setErrorActionType = {
-   type: typeof SET_ERROR
-   error: string 
-   isAuth: boolean 
-  }
-
-
-
- const  setAuthSuccess = (): setAuthSuccessActionType=>({type: IS_AUTH_SUCCESS,  error : '', isAuth: true})
-
- const  setError = (error: string): setErrorActionType=>({type : SET_ERROR, error : error, isAuth: false})
-
- 
-
- export const signInSuccess  = (email: string, password: string, rememberMe: boolean)=> async (dispatch: any)  =>{
-
-  try {
-    let response = await signInApi.getProfile(email, password, rememberMe)
-
-    if(response.success){
-      dispatch(setAuthSuccess())
-      dispatch(setProfileSuccess(response))
-    }
-    else {
-      dispatch(setError(response.error))
-    }
-
-    
-  } catch (error) {
-     dispatch(setError(error.message))
-  }
- 
+  type: typeof SET_ERROR
+  error: string
+  isAuth: boolean
 }
 
 
+const setAuthSuccess = (): setAuthSuccessActionType => ({ type: IS_AUTH_SUCCESS, error: '', isAuth: true })
+export const setError = (error: string): setErrorActionType => ({ type: SET_ERROR, error: error, isAuth: false })
+export const signInSuccess = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+
+  try {
+    let response = await signInApi.signIn(email, password, rememberMe)
+    dispatch(setAuthSuccess())
+    dispatch(setProfileSuccess(response))
+  } catch (error) {
+    if (error.response) {
+      dispatch(setError(error.response.data.error))
+    } else {
+      dispatch(setError('Some ERROR'))
+    }
+  }
+}

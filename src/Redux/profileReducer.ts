@@ -9,7 +9,7 @@ export type ProfileType ={
   name: '',
   rememberMe: false,
   token: '',
-  tokenDeathTime: 1578670634199,
+  tokenDeathTime: number,
   __v: 0,
   _id: ''
   success : boolean
@@ -76,6 +76,7 @@ export const setProfile= () => async (dispatch:any)=>{
       }
     } 
   } catch (error) {
+    debugger
      dispatch(setError('Somethisg wrong'))
   }
 }
