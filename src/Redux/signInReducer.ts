@@ -1,5 +1,6 @@
 import { signInApi } from "../components/api/signInApi";
 import { setProfileSuccess } from "./profileReducer";
+import { Dispatch } from "redux";
 
 
 const IS_AUTH_SUCCESS = 'signIn/IS_AUTH_SUCCESS'
@@ -8,7 +9,6 @@ const SET_ERROR = 'signIn/SET_ERROR'
 const initialState = {
   isAuth: false,
   error: ''
-
 }
 
 export type InitialStateType = typeof initialState;
@@ -44,9 +44,10 @@ type setErrorActionType = {
 
 
 const setAuthSuccess = (): setAuthSuccessActionType => ({ type: IS_AUTH_SUCCESS, error: '', isAuth: true })
-export const setError = (error: string): setErrorActionType => ({ type: SET_ERROR, error: error, isAuth: false })
-export const signInSuccess = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+const setError = (error: string): setErrorActionType => ({ type: SET_ERROR, error: error, isAuth: false })
 
+
+export const signInSuccess = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
   try {
     let response = await signInApi.signIn(email, password, rememberMe)
     dispatch(setAuthSuccess())
@@ -58,4 +59,8 @@ export const signInSuccess = (email: string, password: string, rememberMe: boole
       dispatch(setError('Some ERROR'))
     }
   }
+}
+
+export const setErrorMessage = (error: string) => (dispatch: Dispatch) =>{
+  dispatch(setError(error))
 }

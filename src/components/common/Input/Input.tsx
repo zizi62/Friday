@@ -19,7 +19,7 @@ const Input: React.FC<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, H
 
     return <div>
         <input className={inputStyle} type='text' name='myInput' onKeyDown={onKeyPress}  {...restProps} />
-       {error? <span className={style.error}>{error}</span>: null} 
+       {/* {error? <span className={style.error}>{error}</span>: null}  */}
     </div>
 }
 

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import SignIn from './SignIn'
 import style from './signIn.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { signInSuccess } from '../../../Redux/signInReducer'
+import { signInSuccess, setErrorMessage } from '../../../Redux/signInReducer'
 import { AppStateType } from '../../../Redux/store'
 import ErrorMessage from '../../common/ErrorMessage/ErrorMessage'
 
@@ -14,12 +14,12 @@ type SignInContainerPropsType = {
 
 const SignInContainer: React.FC<SignInContainerPropsType> = () => {
 
-    const authorisationError = useSelector((store: AppStateType) => store.signInPage.error)
+    const error = useSelector((store: AppStateType) => store.signInPage.error)
 
     const [email, setEmailValue] = useState<string>('')
     const [password, setPasswordValue] = useState<string>('')
     const [rememberMe, setRememberMeValue] = useState<boolean>(false)
-    const [error, setError] = useState<string>('')
+    // const [error, setError] = useState<string>('')
 
     const dispatch = useDispatch();
     const signIn = useCallback(
@@ -30,7 +30,7 @@ const SignInContainer: React.FC<SignInContainerPropsType> = () => {
                 setPasswordValue('')
                 setRememberMeValue(false)
             } else {
-                setError('all fields must be filled')
+                dispatch(setErrorMessage('all fields must be filled'))
                 return
             }
         },
@@ -40,18 +40,18 @@ const SignInContainer: React.FC<SignInContainerPropsType> = () => {
 
     const setEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setEmailValue(e.currentTarget.value)
-        setError('')
+        dispatch(setErrorMessage(''))
 
-    }, [setEmailValue, setError]);
+    }, [setEmailValue]);
     const setPassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setPasswordValue(e.currentTarget.value)
-        setError('')
-    }, [setPasswordValue, setError]);
+        dispatch(setErrorMessage(''))
+    }, [setPasswordValue]);
     const setRememberMe = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setRememberMeValue(e.currentTarget.checked), [setRememberMeValue]);
 
     return <div className={style.wraper}>
         <h2>SIGN IN</h2>
-        {authorisationError && <ErrorMessage message={authorisationError} />}
+        {error && <ErrorMessage message={error} />}
         <SignIn email={email}
             password={password}
             rememberMe={rememberMe}
