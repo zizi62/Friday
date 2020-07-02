@@ -17,3 +17,12 @@
     color:#ffff;
     text-decoration: none;
 }
+
+.header button {
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: #09024F;
+	color: white;
+	font-weight: bold;
+	font-size: 1em;
+}
