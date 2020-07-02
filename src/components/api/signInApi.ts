@@ -15,6 +15,6 @@ export const signInApi = {
              return await instance.post<getProfileType>(`auth/login`, {email, password, rememberMe})
           
         }         
-}
+};
 
 
