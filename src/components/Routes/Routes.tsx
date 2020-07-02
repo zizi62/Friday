@@ -16,7 +16,7 @@ export const PROFILE_PATH = '/profile';
 
 const Routes:React.FC = () =>{
     return <>
-      <Route path={SIGN_IN_PATH} component={SignInPage} />
+      	<Route path={SIGN_IN_PATH} component={SignInPage} />
         <Route path={REGISTER_PATH} component={RegistrationContainer} />
         <Route path = {FORGOT_PASSWORD_PATH} component = {ForgotPasswordPage}/>
         <Route path = {SET_NEW_PASSWORD_PATH } component = {SetNewPasswordContainer}/>
