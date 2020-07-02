@@ -27,10 +27,10 @@ const Header: React.FC<HeaderPropsType> = () => {
 	return (
 		<div className={style.header}>
 			{disableMenu ?
-				<button onClick={() => setDisableMenu(false)}>Menu</button>
+				<button onClick={() => setDisableMenu(false)}>Show navigation menu</button>
 				:
 				<>
-				<button onClick={() => setDisableMenu(true)}>Menu</button>
+				<button onClick={() => setDisableMenu(true)}>Hide navigation menu</button>
 					<NavLink className={style.link} to={SIGN_IN_PATH}>SIGN IN</NavLink>
 					<NavLink className={style.link} to={REGISTER_PATH}>REGISTRATION</NavLink>
 					<NavLink className={style.link} to={FORGOT_PASSWORD_PATH}>FORGOT PASSWORD</NavLink>
