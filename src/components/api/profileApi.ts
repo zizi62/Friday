@@ -1,12 +1,10 @@
 import axios from "axios";
 import { ProfileType } from "../../Redux/profileReducer";
 
-
 export const instance = axios.create({
     baseURL : 'https://cards-nya-back.herokuapp.com/1.0/'
  
 });
-
 
 export const localStorageApi = {
     setToken(token: string){
