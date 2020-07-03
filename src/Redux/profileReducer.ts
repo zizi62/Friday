@@ -65,7 +65,7 @@ export const setProfile= () => async (dispatch: Dispatch,  getState: () => AppSt
       let response = await profileApi.getProfile(token)
         dispatch(setProfileSuccess(response.data))
         dispatch(setTokenSuccess(response.data.token))
-        response.data.rememberMe&&localStorageApi.setToken(response.data.token)
+        localStorageApi.setToken(response.data.token)
         
   } catch (error) {
     if (error.response) {

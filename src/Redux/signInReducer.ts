@@ -66,7 +66,7 @@ export const signInSuccess = (email: string, password: string, rememberMe: boole
 }
 
 export const siginOutFromProfile =()=> (dispatch:Dispatch)=>{
- localStorageApi.setToken('')
+  localStorageApi.setToken('')
   dispatch(setAuthSuccess(false))
   dispatch(setProfileSuccess( {} as ProfileType))
 }
