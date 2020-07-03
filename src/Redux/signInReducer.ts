@@ -1,5 +1,5 @@
 import { signInApi } from "../components/api/signInApi";
-import {setTokenSuccess, setProfileSuccess, ProfileType } from "./profileReducer";
+import { setTokenSuccess, setProfileSuccess, ProfileType } from "./profileReducer";
 import { Dispatch } from "redux";
 import { localStorageApi } from "../components/api/profileApi";
 
@@ -30,15 +30,13 @@ export const signInReducer = (state: InitialStateType = initialState, action: Ac
   }
 }
 
-type ActionType = setAuthSuccessActionType | setErrorActionType 
+type ActionType = setAuthSuccessActionType | setErrorActionType
 
 type setAuthSuccessActionType = {
   type: typeof IS_AUTH_SUCCESS
   isAuth: boolean
   error: string
 }
-
-
 
 type setErrorActionType = {
   type: typeof SET_ERROR
@@ -65,18 +63,18 @@ export const signInSuccess = (email: string, password: string, rememberMe: boole
   }
 }
 
-export const siginOutFromProfile =()=> (dispatch:Dispatch)=>{
+export const siginOutFromProfile = () => (dispatch: Dispatch) => {
   localStorageApi.setToken('')
   dispatch(setAuthSuccess(false))
-  dispatch(setProfileSuccess( {} as ProfileType))
+  dispatch(setProfileSuccess({} as ProfileType))
 }
 
-export const setIsAuth = (IsAuth: boolean, token: string) => (dispatch :Dispatch)=> {
+export const setIsAuth = (IsAuth: boolean, token: string) => (dispatch: Dispatch) => {
   dispatch(setAuthSuccess(IsAuth))
   dispatch(setTokenSuccess(token))
- 
+
 }
 
-export const setErrorMessage = (error: string) => (dispatch:Dispatch) =>{
+export const setErrorMessage = (error: string) => (dispatch: Dispatch) => {
   dispatch(setError(error))
 }

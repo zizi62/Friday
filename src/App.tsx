@@ -22,12 +22,6 @@ function App() {
     <HeaderContainer />
     <Main />
   </div>
-
-
-
-
-
-
 }
 
 export default App;
