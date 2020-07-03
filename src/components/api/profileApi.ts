@@ -12,7 +12,6 @@ export const localStorageApi = {
     },
     getToken(){
         return localStorage.getItem('token')
-    
     }
 }
 export const profileApi = {   
