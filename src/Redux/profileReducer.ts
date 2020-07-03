@@ -1,22 +1,20 @@
-import { profileApi, getToken } from "../components/api/profileApi";
+import { profileApi, localStorageApi} from "../components/api/profileApi";
+import { Dispatch } from "redux";
+import { AppStateType } from "./store";
+import { setAuthSuccess } from "./signInReducer";
 
 const SET_PROFILE = 'profile/SET_PROFILE'
+const SET_TOKEN = 'profile/SET_TOKEN'
 const SET_ERROR = 'profile/SET_ERROR'
 
 export type ProfileType ={
-  email: '',
-  isAdmin: false,
-  name: '',
-  rememberMe: false,
-  token: '',
-  tokenDeathTime: number,
-  __v: 0,
-  _id: ''
-  success : boolean
+  name: string,
+  rememberMe :boolean
+  token: string
 }
 
 const initialState = {
- profile: {} as ProfileType ,
+  profile: {} as ProfileType,
   error : '',
   token : ''
 
@@ -25,14 +23,18 @@ const initialState = {
 
 export type InitialStateType = typeof initialState;
 
-export const profileReducer = (state: InitialStateType = initialState, action:actionType) =>{
+export const profileReducer = (state= initialState, action: actionType) =>{
   switch (action.type) {
     case SET_PROFILE:
       return {
         ...state,
         profile: action.profile
-
       }
+      case SET_TOKEN:
+        return {
+          ...state,
+          token: action.token
+        }
       case SET_ERROR:
         return {
           ...state,
@@ -44,40 +46,36 @@ export const profileReducer = (state: InitialStateType = initialState, action:ac
   
 }
 
-type actionType = setProfileSuccessActionType |setErrorActionType
+type actionType = setProfileSuccessActionType|setErrorActionType|setTokenTypeAction
 
-type setProfileSuccessActionType = {
- type : typeof  SET_PROFILE
- profile: {}
-}
-type setErrorActionType = {
-  type: typeof SET_ERROR
-  error: string 
-
- }
-
-
-export const setProfileSuccess = (profile : {}) => ({type: SET_PROFILE, profile :profile })
+type setProfileSuccessActionType = ({type : typeof  SET_PROFILE, profile: ProfileType})
+type setErrorActionType = ({ type: typeof SET_ERROR, error: string })
+type setTokenTypeAction = ({ type: typeof SET_TOKEN, token: string })
+ 
+ 
+export const setProfileSuccess = (profile : ProfileType):setProfileSuccessActionType => ({type: SET_PROFILE, profile: profile})
+export const setTokenSuccess = (token: string):setTokenTypeAction => ({type: SET_TOKEN, token: token})
 const  setError = (error: string): setErrorActionType=>({type : SET_ERROR, error : error})
 
-export const setProfile= () => async (dispatch:any)=>{
- 
+
+export const setProfile= () => async (dispatch: Dispatch,  getState: () => AppStateType) =>{
+  
   try {
-    debugger
-    let token = getToken()
-    token = '7c14aed0-b8f5-11ea-82a5-e1ef009c6bcd'
-    if(token) {
+    let token = getState().profilePage.token
       let response = await profileApi.getProfile(token)
-      if(response.data.success){
         dispatch(setProfileSuccess(response.data))
-      }
-      else {
-        dispatch(setError(response.data.error))
-      }
-    } 
+        dispatch(setTokenSuccess(response.data.token))
+        response.data.rememberMe&&localStorageApi.setToken(response.data.token)
+        
   } catch (error) {
-    debugger
-     dispatch(setError('Somethisg wrong'))
+    if (error.response) {
+      dispatch(setError(error.response.data.error))
+      dispatch(setAuthSuccess(false))
+      console.log(error.response.data.error)
+    } else {
+      dispatch(setError('Some ERROR'))
+    }
   }
 }
+
 

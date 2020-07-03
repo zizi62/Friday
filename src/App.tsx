@@ -1,26 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
-import { HashRouter } from 'react-router-dom';
 import Main from './components/Main/Main';
-import { Provider } from 'react-redux';
-import store from './Redux/store';
+import { useDispatch } from 'react-redux';
+
+import { setIsAuth } from './Redux/signInReducer';
+import { localStorageApi } from './components/api/profileApi';
 
 
 
 function App() {
-  return (
 
-    <HashRouter>
-      <Provider store={store}>
-      <div className="App">
-        <HeaderContainer />
-        <Main />
-      </div>    
-                </Provider>
-      
-    </HashRouter>
-  );
+  const dispatch = useDispatch()
+  useEffect(() => {
+    let token = localStorageApi.getToken()
+    token && dispatch(setIsAuth(true, token))
+  }, [])
+
+
+  return <div className="App">
+    <HeaderContainer />
+    <Main />
+  </div>
+
+
+
+
+
+
 }
 
 export default App;

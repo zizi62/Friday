@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ProfileType } from "../../Redux/profileReducer";
+
 
 
 const instance = axios.create({
@@ -7,14 +7,25 @@ const instance = axios.create({
 
 });
 
+type signInSuccesType = {
+    token: string
+}
 
-type getProfileType = ProfileType & {error: string}
+type getSighInType =  signInSuccesType & {error: string}
 
 export const signInApi = {   
          async signIn(email: string, password: string, rememberMe: boolean) {
-             return await instance.post<getProfileType>(`auth/login`, {email, password, rememberMe})
+             return await instance.post<getSighInType>(`auth/login`, {email, password, rememberMe})
           
-        }         
-}
+        }      
+        
+//         async signIn(email: string, password: string, rememberMe: boolean) {
+//             debugger
+//             email = 'zizi@gmail.com'
+//             password = '12345678'
+//             return await instance.post(`auth/register`, {email, password})
+         
+//        } 
+    }
 
 

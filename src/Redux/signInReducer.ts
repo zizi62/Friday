@@ -1,6 +1,7 @@
 import { signInApi } from "../components/api/signInApi";
-import { setProfileSuccess } from "./profileReducer";
+import {setTokenSuccess, setProfileSuccess, ProfileType } from "./profileReducer";
 import { Dispatch } from "redux";
+import { localStorageApi } from "../components/api/profileApi";
 
 
 const IS_AUTH_SUCCESS = 'signIn/IS_AUTH_SUCCESS'
@@ -29,13 +30,16 @@ export const signInReducer = (state: InitialStateType = initialState, action: Ac
   }
 }
 
-type ActionType = setAuthSuccessActionType | setErrorActionType
+type ActionType = setAuthSuccessActionType | setErrorActionType 
 
 type setAuthSuccessActionType = {
   type: typeof IS_AUTH_SUCCESS
   isAuth: boolean
   error: string
 }
+
+
+
 type setErrorActionType = {
   type: typeof SET_ERROR
   error: string
@@ -43,15 +47,15 @@ type setErrorActionType = {
 }
 
 
-const setAuthSuccess = (): setAuthSuccessActionType => ({ type: IS_AUTH_SUCCESS, error: '', isAuth: true })
+export const setAuthSuccess = (isAuth: boolean): setAuthSuccessActionType => ({ type: IS_AUTH_SUCCESS, error: '', isAuth: isAuth })
 const setError = (error: string): setErrorActionType => ({ type: SET_ERROR, error: error, isAuth: false })
 
 
 export const signInSuccess = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
   try {
     let response = await signInApi.signIn(email, password, rememberMe)
-    dispatch(setAuthSuccess())
-    dispatch(setProfileSuccess(response))
+    dispatch(setAuthSuccess(true))
+    dispatch(setTokenSuccess(response.data.token))
   } catch (error) {
     if (error.response) {
       dispatch(setError(error.response.data.error))
@@ -61,6 +65,18 @@ export const signInSuccess = (email: string, password: string, rememberMe: boole
   }
 }
 
-export const setErrorMessage = (error: string) => (dispatch: Dispatch) =>{
+export const siginOutFromProfile =()=> (dispatch:Dispatch)=>{
+ localStorageApi.setToken('')
+  dispatch(setAuthSuccess(false))
+  dispatch(setProfileSuccess( {} as ProfileType))
+}
+
+export const setIsAuth = (IsAuth: boolean, token: string) => (dispatch :Dispatch)=> {
+  dispatch(setAuthSuccess(IsAuth))
+  dispatch(setTokenSuccess(token))
+ 
+}
+
+export const setErrorMessage = (error: string) => (dispatch:Dispatch) =>{
   dispatch(setError(error))
 }
