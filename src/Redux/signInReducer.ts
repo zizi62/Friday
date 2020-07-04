@@ -10,7 +10,7 @@ const SET_ERROR = 'signIn/SET_ERROR'
 const initialState = {
   isAuth: false,
   error: ''
-}
+};
 
 export type InitialStateType = typeof initialState;
 
