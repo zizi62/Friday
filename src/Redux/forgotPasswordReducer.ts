@@ -30,7 +30,7 @@ export const forgotPasswordReducer = (state = initialState, action:any) => {
 			};
 		case FORGOT_PASSWORD_ERROR:
 			return {
-				...state, error: action.error
+				...state, error: action.error.message
 			};
 	};
   return state;
