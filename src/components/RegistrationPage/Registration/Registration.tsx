@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom'
 import {SIGN_IN_PATH} from '../../Routes/Routes'
 
 type RegistrationPropsType = {
+    loading: boolean
     email: string
     password: string
     checkPassword: string
@@ -16,7 +17,7 @@ type RegistrationPropsType = {
 }
 
 const Registration: React.FC<RegistrationPropsType> = (props) => {
-    const {email, password, checkPassword, error, setEmail, setPassword, setCheckPassword, signUp} = props;
+    const {loading, email, password, checkPassword, error, setEmail, setPassword, setCheckPassword, signUp} = props;
 
     return <div>
         <Input
@@ -40,9 +41,10 @@ const Registration: React.FC<RegistrationPropsType> = (props) => {
         />
         <Button
             onClick={signUp}
+            disabled={!!loading}
         >
             SIGN UP
-        </Button>
+        </Button >
         <NavLink to={SIGN_IN_PATH}>SIGN IN</NavLink>
     </div>
 };

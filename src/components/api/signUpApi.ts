@@ -24,9 +24,6 @@ const instance = axios.create({
 
 export const signUpApi = {
     fetchRegister(email: string, password: string): Promise<any> {
-        return instance.post<IAddedUser>('auth/register', {email, password}).then(res => {
-            const user = res.data.addedUser;
-            return user;
-        })
+        return instance.post<IAddedUser>('auth/register', {email, password}).then(res => res.data.success)
     }
 };

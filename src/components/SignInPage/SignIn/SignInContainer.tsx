@@ -1,16 +1,13 @@
-import React, { useState, useCallback } from 'react'
+import React, {useState, useCallback} from 'react'
 import SignIn from './SignIn'
 import style from './signIn.module.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { signInSuccess, setErrorMessage } from '../../../Redux/signInReducer'
-import { AppStateType } from '../../../Redux/store'
+import {useDispatch, useSelector} from 'react-redux'
+import {signInSuccess, setErrorMessage} from '../../../Redux/signInReducer'
+import {AppStateType} from '../../../Redux/store'
 import ErrorMessage from '../../common/ErrorMessage/ErrorMessage'
 
 
-
-type SignInContainerPropsType = {
-
-}
+type SignInContainerPropsType = {}
 
 const SignInContainer: React.FC<SignInContainerPropsType> = () => {
 
@@ -51,15 +48,15 @@ const SignInContainer: React.FC<SignInContainerPropsType> = () => {
 
     return <div className={style.wraper}>
         <h2>SIGN IN</h2>
-        {error && <ErrorMessage message={error} />}
+        {error && <ErrorMessage message={error}/>}
         <SignIn email={email}
-            password={password}
-            rememberMe={rememberMe}
-            error={error}
-            setEmail={setEmail}
-            setPassword={setPassword}
-            setRememberMe={setRememberMe}
-            signIn={signIn} />
+                password={password}
+                rememberMe={rememberMe}
+                error={error}
+                setEmail={setEmail}
+                setPassword={setPassword}
+                setRememberMe={setRememberMe}
+                signIn={signIn}/>
     </div>
 }
 
