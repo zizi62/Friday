@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Friday/static/css/main.5920f08f.chunk.css",
-    "main.js": "/Friday/static/js/main.cd224633.chunk.js",
-    "main.js.map": "/Friday/static/js/main.cd224633.chunk.js.map",
+    "main.js": "/Friday/static/js/main.c1fab4a2.chunk.js",
+    "main.js.map": "/Friday/static/js/main.c1fab4a2.chunk.js.map",
     "runtime-main.js": "/Friday/static/js/runtime-main.5b8fa669.js",
     "runtime-main.js.map": "/Friday/static/js/runtime-main.5b8fa669.js.map",
     "static/js/2.a75091fb.chunk.js": "/Friday/static/js/2.a75091fb.chunk.js",
     "static/js/2.a75091fb.chunk.js.map": "/Friday/static/js/2.a75091fb.chunk.js.map",
     "index.html": "/Friday/index.html",
-    "precache-manifest.932d7e5b3ebc34133b614076706ec43b.js": "/Friday/precache-manifest.932d7e5b3ebc34133b614076706ec43b.js",
+    "precache-manifest.363509c2c0a42acb6f8d345ef292eb3d.js": "/Friday/precache-manifest.363509c2c0a42acb6f8d345ef292eb3d.js",
     "service-worker.js": "/Friday/service-worker.js",
     "static/css/main.5920f08f.chunk.css.map": "/Friday/static/css/main.5920f08f.chunk.css.map",
     "static/js/2.a75091fb.chunk.js.LICENSE.txt": "/Friday/static/js/2.a75091fb.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.5b8fa669.js",
     "static/js/2.a75091fb.chunk.js",
     "static/css/main.5920f08f.chunk.css",
-    "static/js/main.cd224633.chunk.js"
+    "static/js/main.c1fab4a2.chunk.js"
   ]
 }
