@@ -5,6 +5,7 @@ import { forgotPasswordReducer } from "./forgotPasswordReducer";
 import { registrationReducer } from "./registrationReducer";
 import { setNewPasswordReducer } from "./setNewPasswordReducer";
 import { signInReducer } from "./signInReducer";
+import {packsReducer} from "./packsReducer";
 
 
 const rootReducer = combineReducers({
@@ -12,9 +13,9 @@ const rootReducer = combineReducers({
     forgotPasswordPage: forgotPasswordReducer,
     registrationPage: registrationReducer,
     setNewPasswordPage: setNewPasswordReducer,
-    signInPage: signInReducer
-    
-})
+    signInPage: signInReducer,
+    packs: packsReducer
+});
 
 export type AppStateType = ReturnType<typeof rootReducer>
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))

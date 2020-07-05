@@ -21,7 +21,7 @@ const initialState = {
   token : ''
 
 
-}
+};
 
 export type InitialStateType = typeof initialState;
 
@@ -63,7 +63,6 @@ const  setError = (error: string): setErrorActionType=>({type : SET_ERROR, error
 export const setProfile= () => async (dispatch:any)=>{
  
   try {
-    debugger
     let token = getToken()
     token = '7c14aed0-b8f5-11ea-82a5-e1ef009c6bcd'
     if(token) {

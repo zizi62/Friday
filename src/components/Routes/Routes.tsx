@@ -5,13 +5,16 @@ import SetNewPasswordContainer from '../SetNewPasswordPage/SetNewPasswordContain
 import ForgotPasswordPage from '../ForgotPasswordPage/ForgotPasswordPage'
 import SignInPage from '../SignInPage/SignInPage'
 import ProfilePage from '../ProfilePage/ProfilePage'
+import PacksPage from "../PacksPage/PacksPage";
+
 
 
 export const SIGN_IN_PATH = '/sign-in';
 export const REGISTER_PATH = '/registration';
 export const FORGOT_PASSWORD_PATH = '/forgot-password';
 export const SET_NEW_PASSWORD_PATH = '/set-new-password'; 
-export const PROFILE_PATH = '/profile'; 
+export const PROFILE_PATH = '/profile';
+export const PACKS_PATH = '/packs';
 
 
 const Routes:React.FC = () =>{
@@ -21,9 +24,9 @@ const Routes:React.FC = () =>{
         <Route path = {FORGOT_PASSWORD_PATH} component = {ForgotPasswordPage}/>
         <Route path = {SET_NEW_PASSWORD_PATH } component = {SetNewPasswordContainer}/>
         <Route path = {PROFILE_PATH} component = {ProfilePage}/>
+        <Route path = {PACKS_PATH} component = {PacksPage}/>
     </>
-
-}
+};
 
 
 export default Routes
