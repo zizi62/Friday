@@ -7,7 +7,8 @@ import {
 	REGISTER_PATH,
 	FORGOT_PASSWORD_PATH,
 	SET_NEW_PASSWORD_PATH,
-	PROFILE_PATH
+	PROFILE_PATH,
+	TABLE_CARDS
 } from '../Routes/Routes';
 
 
@@ -35,7 +36,8 @@ const Header: React.FC<HeaderPropsType> = () => {
 					<NavLink className={style.link} to={REGISTER_PATH}>REGISTRATION</NavLink>
 					<NavLink className={style.link} to={FORGOT_PASSWORD_PATH}>FORGOT PASSWORD</NavLink>
 					<NavLink className={style.link} to={SET_NEW_PASSWORD_PATH}>SET NEW PASSWORD</NavLink>
-					<NavLink className={style.link} to={PROFILE_PATH}> PROFILE</NavLink>
+					<NavLink className={style.link} to={PROFILE_PATH}>PROFILE</NavLink>
+					<NavLink className={style.link} to={TABLE_CARDS}>CARDS</NavLink>
 				</>
 			}
 		</div>
