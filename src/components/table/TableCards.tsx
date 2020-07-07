@@ -18,7 +18,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
 const tableIcons = {
-    Add: forwardRef((props:any, ref:any) => <AddBox {...props} ref={ref} />),
+    Add: forwardRef((props:any, ref:any) => <AddBox {...props} ref={ref} onClick={() => alert("Wow it's work:)")} />),
     Check: forwardRef((props:any, ref:any) => <Check {...props} ref={ref} />),
     Clear: forwardRef((props:any, ref:any) => <Clear {...props} ref={ref} />),
     Delete: forwardRef((props:any, ref:any) => <DeleteOutline {...props} ref={ref} />),
