@@ -31,7 +31,7 @@ const tableIcons = {
     NextPage: forwardRef((props:any, ref:any) => <ChevronRight {...props} ref={ref} />),
     PreviousPage: forwardRef((props:any, ref:any) => <ChevronLeft {...props} ref={ref} />),
     ResetSearch: forwardRef((props:any, ref:any) => <Clear {...props} ref={ref} />),
-    Search: forwardRef((props:any, ref:any) => <Search {...props} ref={ref} />),
+    Search: forwardRef((props:any, ref:any) => <Search {...props} ref={ref} onClick={() => alert('Hello great Programmer!')} />),
     SortArrow: forwardRef((props:any, ref:any) => <ArrowDownward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props:any, ref:any) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props:any, ref:any) => <ViewColumn {...props} ref={ref} />)
