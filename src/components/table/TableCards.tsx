@@ -81,7 +81,7 @@ export default function TableCards() {
   const [state, setState] = React.useState<TableState>({
     columns: [
       { title: 'Name', field: 'name' },
-      { title: 'Rating', field: 'rating' }
+      { title: 'Grade', field: 'grade' }
     ],
     data: tableDrawing,
   });
