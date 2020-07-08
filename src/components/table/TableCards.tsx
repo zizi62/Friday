@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import MaterialTable, { Column } from 'material-table';
 
 import AddBox from '@material-ui/icons/AddBox';
@@ -16,6 +16,10 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { useDispatch, useSelector } from 'react-redux';
+import { tableDrawingTC } from '../../Redux/tableDrawingReducer';
+import { AppStateType} from './../../Redux/store';
+
 
 const tableIcons = {
     Add: forwardRef((props:any, ref:any) => <AddBox {...props} ref={ref} onClick={() => alert("Wow it's work:)")} />),
@@ -45,36 +49,46 @@ interface Row {
 }
 
 interface TableState {
-  columns: Array<Column<Row>>;
-  data: Row[];
+  columns: any;
+  data: any;
 }
 
 export default function TableCards() {
+
+	const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(tableDrawingTC());
+	}, []);
+
+	const tableDrawing = useSelector((store: AppStateType) => store.tableDrawingPage.table);
+	console.log(tableDrawing);
+
+// 	cardsCount: 0
+// created: "2020-07-07T15:43:43.340Z"
+// grade: 0
+// name: "BaskoPack"
+// path: "/def"
+// private: false
+// rating: 0
+// shots: 0
+// type: "pack"
+// updated: "2020-07-07T15:44:10.599Z"
+// user_id: "5ef8dab83d84f600041f53bc"
+// user_name: "1989bvg@gmail.com"
+// __v: 0
+// _id: "5f04982f83dea700043602a5"
+	
   const [state, setState] = React.useState<TableState>({
     columns: [
       { title: 'Name', field: 'name' },
-      { title: 'Surname', field: 'surname' },
-      { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
-      {
-        title: 'Birth Place',
-        field: 'birthCity',
-        lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
-      },
+      { title: 'Rating', field: 'rating' }
     ],
-    data: [
-      { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-      {
-        name: 'Zerya Betül',
-        surname: 'Baran',
-        birthYear: 2017,
-        birthCity: 34,
-      },
-    ],
+    data: tableDrawing,
   });
 
   return (
 		<MaterialTable
-			icons={tableIcons}
+			icons={tableIcons} 
       title="Editable Example"
       columns={state.columns}
       data={state.data}

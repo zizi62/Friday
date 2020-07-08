@@ -5,6 +5,7 @@ import { forgotPasswordReducer } from "./forgotPasswordReducer";
 import { registrationReducer } from "./registrationReducer";
 import { setNewPasswordReducer } from "./setNewPasswordReducer";
 import { signInReducer } from "./signInReducer";
+import { tableDrawingReducer } from "./tableDrawingReducer";
 
 
 const rootReducer = combineReducers({
@@ -12,8 +13,8 @@ const rootReducer = combineReducers({
     forgotPasswordPage: forgotPasswordReducer,
     registrationPage: registrationReducer,
     setNewPasswordPage: setNewPasswordReducer,
-    signInPage: signInReducer
-    
+    signInPage: signInReducer,
+    tableDrawingPage: tableDrawingReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>
