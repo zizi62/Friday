@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MaterialTable, { Column } from 'material-table';
+import { setTableData } from '../../Redux/tableZiziReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../Redux/store';
 
 interface Row {
   name: string;
-  surname: string;
-  birthYear: number;
-  birthCity: number;
+  created: string
+  
 }
 
 interface TableState {
@@ -14,26 +16,33 @@ interface TableState {
 }
 
 export default function TableCards() {
+  debugger
+  const dispatch = useDispatch();
+  const CardPacks = useSelector((store: AppStateType) => store.tablePage.cardPacks) 
+  let temp =  [{ name: "no Name", created: '123'},{ name: "no sdsadasdasdme", created: '123'} ];
+
+  useEffect(()=>{
+    dispatch(setTableData())
+  },[])
+
+
+
   const [state, setState] = React.useState<TableState>({
     columns: [
       { title: 'Name', field: 'name' },
-      { title: 'Surname', field: 'surname' },
-      { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
-      {
-        title: 'Birth Place',
-        field: 'birthCity',
-        lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
-      },
+      { title: 'Created', field: 'created' },
+      
     ],
-    data: [
-      { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-      {
-        name: 'Zerya Betül',
-        surname: 'Baran',
-        birthYear: 2017,
-        birthCity: 34,
-      },
-    ],
+    data: temp
+    //  [
+    //   { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+    //   {
+    //     name: 'Zerya Betül',
+    //     surname: 'Baran',
+    //     birthYear: 2017,
+    //     birthCity: 34,
+    //   },
+    // ],
   });
 
   return (

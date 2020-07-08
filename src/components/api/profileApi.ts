@@ -15,7 +15,7 @@ export const localStorageApi = {
     }
 }
 export const profileApi = {   
-    async getProfile(token: string|null) {
+    async getProfile(token: string) {
        return await instance.post<ProfileType>(`auth/me`, {token})     
     }
 }
