@@ -1,25 +1,37 @@
 import React, { useEffect } from 'react';
 import MaterialTable, { Column } from 'material-table';
-import { setTableData } from '../../Redux/tableZiziReducer';
+import { setTableData, packType, cardPacksType } from '../../Redux/tableZiziReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from '../../Redux/store';
 
-interface Row {
-  name: string;
-  created: string
-  
-}
+// interface Row {
+//   _id: string
+//   user_id: string
+//   name: string
+//   path: string
+//   grade: number
+//   shots: number
+//   rating: number
+//   type: string
+//   created: string
+//   updated: string
+//   __v: number
+// }
+
+// type Row = cardPacksType
+
+
 
 interface TableState {
-  columns: Array<Column<Row>>;
-  data: Row[];
+  columns: Array<Column<Array<packType>>>;
+  data: Array<packType>
 }
 
 export default function TableCards() {
   debugger
   const dispatch = useDispatch();
   const CardPacks = useSelector((store: AppStateType) => store.tablePage.cardPacks) 
-  let temp =  [{ name: "no Name", created: '123'},{ name: "no sdsadasdasdme", created: '123'} ];
+  // let temp =  [{ name: "no Name", created: '123'},{ name: "no sdsadasdasdme", created: '123'} ];
 
   useEffect(()=>{
     dispatch(setTableData())
@@ -31,18 +43,22 @@ export default function TableCards() {
     columns: [
       { title: 'Name', field: 'name' },
       { title: 'Created', field: 'created' },
+      { title: 'Updated', field: 'updated' }
+      // {_id: string}
+      // _id: string
+      // user_id: string
+      // name: string
+      // path: string
+      // grade: number
+      // shots: number
+      // rating: number
+      // type: string
+      // created: string
+      // updated: string
+      // __v: number
       
     ],
-    data: temp
-    //  [
-    //   { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-    //   {
-    //     name: 'Zerya Betül',
-    //     surname: 'Baran',
-    //     birthYear: 2017,
-    //     birthCity: 34,
-    //   },
-    // ],
+    data: CardPacks
   });
 
   return (

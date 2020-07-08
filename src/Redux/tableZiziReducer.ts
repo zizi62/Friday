@@ -11,31 +11,31 @@ const SET_PACK = 'tableZiziReducer/SET_PACK'
 const SET_ERROR = 'tableZiziReducer/SET_ERROR'
 
 export type packType = {
-  _id: ''
-  user_id: ''
-  name: "no Name"
-  path: ''
-  grade: number
-  shots: number
-  rating: number
-  type: ''
-  created: ''
-  updated: ''
+  // _id: string
+  // user_id: string
+  name: string
+  // path: string
+  // grade: number
+  // shots: number
+  // rating: number
+  // type: string
+  created: string
+  updated: string
   __v: number
-}
+}| {}
 
-export type cardPacksType = packType[]
+export type cardPacksType =  Array<packType> | []
 
 type InitialStateType = {
-  cardPacks : []| cardPacksType,
-  error: string,
+  cardPacks : []|cardPacksType
+  error: string
   pack: {} | packType
   
 }
 
 
 const initialState: InitialStateType = {
-  cardPacks :[] ,
+  cardPacks :[],
   error: '',
   pack: {}
 };
@@ -67,12 +67,12 @@ type ActionType = setCardPacksActionType | setPackActionType | setErrorActionTyp
 
 type setCardPacksActionType = {
   type: typeof SET_CARDPACKS
-  cardPacks: []
+  cardPacks: cardPacksType
 }
 
 type setPackActionType = {
   type: typeof SET_PACK
-  pack: {}
+  pack: packType
 }
 
 type setErrorActionType = {
@@ -82,8 +82,8 @@ type setErrorActionType = {
 }
 
 
-export const setTableSuccess = (cardPacks: []): setCardPacksActionType => ({ type: SET_CARDPACKS, cardPacks: cardPacks })
-export const setNewPack = (pack: {}): setPackActionType => ({ type: SET_PACK, pack: pack })
+export const setTableSuccess = (cardPacks: cardPacksType): setCardPacksActionType => ({ type: SET_CARDPACKS, cardPacks: cardPacks })
+export const setNewPack = (pack: packType): setPackActionType => ({ type: SET_PACK, pack: pack })
 const setError = (error: string): setErrorActionType => ({ type: SET_ERROR, error: error, isAuth: false })
 
 

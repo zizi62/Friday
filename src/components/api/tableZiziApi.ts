@@ -1,4 +1,5 @@
 import axios from "axios";
+import { cardPacksType } from "../../Redux/tableZiziReducer";
 
 
 
@@ -7,7 +8,7 @@ const instance = axios.create({
 });
 
 type getTableDataType = {
-    cardPacks : []
+    cardPacks : cardPacksType
     pageCount: number
     page: number
     token: string
@@ -22,7 +23,10 @@ export const tableApi = {
           
         },   
         async setNewPack(newPack: {}, token:string){
-            return await instance.post(`/cards/pack`, {token})
+            return await instance.post(`/cards/pack`, {token, newPack})
+        },
+        async deletePack (token:string, id: string){
+            return await instance.delete(`/cards/pack`)
         }
 
     }
