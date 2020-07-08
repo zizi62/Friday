@@ -41,7 +41,7 @@ interface Row {
   name: string;
   surname: string;
   birthYear: number;
-  birthCity: number;
+	birthCity: number;
 }
 
 interface TableState {
@@ -73,7 +73,7 @@ export default function TableCards() {
   });
 
   return (
-    <MaterialTable
+		<MaterialTable
 			icons={tableIcons}
       title="Editable Example"
       columns={state.columns}
