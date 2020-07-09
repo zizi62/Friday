@@ -19,6 +19,8 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useDispatch, useSelector } from 'react-redux';
 import { tableDrawingTC } from '../../Redux/tableDrawingReducer';
 import { AppStateType} from './../../Redux/store';
+import { localStorageApi } from './../../components/api/profileApi';
+
 
 
 interface Row {
@@ -26,16 +28,17 @@ interface Row {
   surname: string;
   birthYear: number;
 	birthCity: number;
-}
+};
 
 interface TableState {
   columns: any;
   data: any;
-}
+};
+
 
 export default function TableCards() {
 
-	const filterPages = (e: any) => alert(e.currentTarget.value)
+	let token:string|null = '';
 
 	const tableIcons = {
     Add: forwardRef((props:any, ref:any) => <AddBox {...props} ref={ref} onClick={() => alert("Wow it's work:)")} />),
@@ -45,7 +48,7 @@ export default function TableCards() {
     DetailPanel: forwardRef((props:any, ref:any) => <ChevronRight {...props} ref={ref} />),
     Edit: forwardRef((props:any, ref:any) => <Edit {...props} ref={ref} />),
     Export: forwardRef((props:any, ref:any) => <SaveAlt {...props} ref={ref} />),
-    Filter: forwardRef((props:any, ref:any) => <FilterList {...props} ref={ref} onClick={(e: any) => filterPages(e)} />),
+    Filter: forwardRef((props:any, ref:any) => <FilterList {...props} ref={ref} onClick={() => alert('Test')} />),
     FirstPage: forwardRef((props:any, ref:any) => <FirstPage {...props} ref={ref} />),
     LastPage: forwardRef((props:any, ref:any) => <LastPage {...props} ref={ref} />),
     NextPage: forwardRef((props:any, ref:any) => <ChevronRight {...props} ref={ref} />),
@@ -59,6 +62,7 @@ export default function TableCards() {
 
 	const dispatch = useDispatch()
   useEffect(() => {
+		token = localStorageApi.getToken();
     dispatch(tableDrawingTC());
 	}, []);
 
@@ -79,6 +83,23 @@ export default function TableCards() {
 // user_name: "1989bvg@gmail.com"
 // __v: 0
 // _id: "5f04982f83dea700043602a5"
+
+// config: {url: "cards/pack/?token=1ac3eae0-c1da-11ea-a90b-33886681af28", method: "get", headers: {…}, baseURL: "https://cards-nya-back.herokuapp.com/1.0/", transformRequest: Array(1), …}
+// data:
+// cardPacks: (4) [{…}, {…}, {…}, {…}]
+// cardPacksTotalCount: 49
+// maxGrade: 0
+// minGrade: 0
+// page: 1
+// pageCount: 4
+// token: "1bf93690-c1da-11ea-a90b-33886681af28"
+// tokenDeathTime: 1594306110457
+// __proto__: Object
+// headers: {content-length: "1368", content-type: "application/json; charset=utf-8"}
+// request: XMLHttpRequest {readyState: 4, timeout: 0, withCredentials: false, upload: XMLHttpRequestUpload, onreadystatechange: ƒ, …}
+// status: 200
+// statusText: "OK"
+// __proto__: Object
 	
   const [state, setState] = React.useState<TableState>({
     columns: [
@@ -96,7 +117,25 @@ export default function TableCards() {
 			icons={tableIcons} 
       title="Editable Example"
       columns={state.columns}
-      data={state.data}
+			// data={state.data}
+			data={async query =>
+        new Promise(async (resolve, reject) => {
+          let url = `https://cards-nya-back.herokuapp.com/1.0/cards/pack/?token=${token}`
+          url += '&pageCount=' + query.pageSize
+          url += '&page=' + (query.page + 1)
+          await fetch(url)
+            .then(response => response.json())
+            .then(result => {
+							console.log(result)
+
+              resolve({
+                data: result.cardPacks,
+                page: result.page - 1,
+                totalCount: result.cardPacksTotalCount,
+              })
+            })
+        })
+      }
       editable={{
         onRowAdd: (newData) =>
           new Promise((resolve) => {
@@ -136,4 +175,4 @@ export default function TableCards() {
       }}
     />
   );
-}
+};

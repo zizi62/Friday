@@ -10,15 +10,15 @@ const initialState = {
 
 export interface IInitialStateTypeTable {
 	table: Array<object>;
-}
+};
 
 interface ItableData {
 	type: string;
 	data: Array<object>;
-}
+};
 
 export const tableDrawingReducer = (state: IInitialStateTypeTable = initialState, action: ItableData) => {
-	switch(action.type) {
+	switch (action.type) {
 		case TABLE_DRAWING:
 			return {
 				...state, table: action.data
@@ -28,15 +28,15 @@ export const tableDrawingReducer = (state: IInitialStateTypeTable = initialState
 	}
 };
 
-const tableDrawingAC = (data: Array<object>) => ({ type: TABLE_DRAWING, data })
+const tableDrawingAC = (data: Array<object>) => ({ type: TABLE_DRAWING, data });
 
-export const tableDrawingTC= () => async (dispatch: Dispatch, getState: () => AppStateType) => {
-  try {
-    let token = getState().profilePage.token
-			let response = await getTableDrawingApi.getTableDrawing(token);
-			console.log(response.data.cardPacks);
-			dispatch(tableDrawingAC(response.data.cardPacks))
-  } catch (error) {
-   
-  }
-}
+export const tableDrawingTC = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
+	try {
+		const token = getState().profilePage.token;
+		const response = await getTableDrawingApi.getTableDrawing(token);
+		dispatch(tableDrawingAC(response.data.cardPacks));
+		console.log(response);
+	} catch (error) {
+
+	}
+};
