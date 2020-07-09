@@ -35,10 +35,10 @@ interface TableState {
   data: any;
 };
 
+let token:string|null = '';
+
 
 export default function TableCards() {
-
-	let token:string|null = '';
 
 	const tableIcons = {
     Add: forwardRef((props:any, ref:any) => <AddBox {...props} ref={ref} onClick={() => alert("Wow it's work:)")} />),
