@@ -41,7 +41,7 @@ interface TableState {
 export default function TableCards() {
 	let token: string | null = '';
 
-	const tableIcons = {
+	const tableIcons:any = {
 		Add: forwardRef((props: any, ref: any) => <AddBox {...props} ref={ref} onClick={() => alert("Wow it's work:)")} />),
 		Check: forwardRef((props: any, ref: any) => <Check {...props} ref={ref} />),
 		Clear: forwardRef((props: any, ref: any) => <Clear {...props} ref={ref} />),
