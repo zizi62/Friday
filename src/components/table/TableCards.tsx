@@ -1,5 +1,5 @@
-import React, { forwardRef, useEffect } from 'react';
-import MaterialTable, { Column } from 'material-table';
+import React, { forwardRef, useEffect, useState } from 'react';
+import MaterialTable from 'material-table';
 
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -19,8 +19,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useDispatch, useSelector } from 'react-redux';
 import { tableDrawingTC } from '../../Redux/tableDrawingReducer';
 import { AppStateType } from './../../Redux/store';
-import { localStorageApi } from './../../components/api/profileApi';
-import { setTokenSuccess, setProfile } from '../../Redux/profileReducer';
+import { localStorageApi } from '../api/profileApi';
 
 
 
@@ -37,35 +36,35 @@ interface TableState {
 };
 
 
-
 export default function TableCards() {
-	let token: string | null = '';
 
-	const tableIcons:any = {
-		Add: forwardRef((props: any, ref: any) => <AddBox {...props} ref={ref} onClick={() => alert("Wow it's work:)")} />),
+	// let token: string | null = useSelector((store: AppStateType) => store.tableDrawingPage.token);
+	let token: any = document.cookie;
+	const dispatch = useDispatch();
+	useEffect(() => {
+		token = localStorageApi.getToken();
+    dispatch(tableDrawingTC());
+	})
+
+	const tableIcons: any = {
+		Add: forwardRef((props: any, ref: any) => <AddBox {...props} ref={ref} />),
 		Check: forwardRef((props: any, ref: any) => <Check {...props} ref={ref} />),
 		Clear: forwardRef((props: any, ref: any) => <Clear {...props} ref={ref} />),
 		Delete: forwardRef((props: any, ref: any) => <DeleteOutline {...props} ref={ref} />),
 		DetailPanel: forwardRef((props: any, ref: any) => <ChevronRight {...props} ref={ref} />),
 		Edit: forwardRef((props: any, ref: any) => <Edit {...props} ref={ref} />),
 		Export: forwardRef((props: any, ref: any) => <SaveAlt {...props} ref={ref} />),
-		Filter: forwardRef((props: any, ref: any) => <FilterList {...props} ref={ref} onClick={() => alert('Test')} />),
+		Filter: forwardRef((props: any, ref: any) => <FilterList {...props} ref={ref} />),
 		FirstPage: forwardRef((props: any, ref: any) => <FirstPage {...props} ref={ref} />),
 		LastPage: forwardRef((props: any, ref: any) => <LastPage {...props} ref={ref} />),
 		NextPage: forwardRef((props: any, ref: any) => <ChevronRight {...props} ref={ref} />),
 		PreviousPage: forwardRef((props: any, ref: any) => <ChevronLeft {...props} ref={ref} />),
 		ResetSearch: forwardRef((props: any, ref: any) => <Clear {...props} ref={ref} />),
-		Search: forwardRef((props: any, ref: any) => <Search {...props} ref={ref} onClick={() => alert('Hello great Programmer!')} />),
+		Search: forwardRef((props: any, ref: any) => <Search {...props} ref={ref} />),
 		SortArrow: forwardRef((props: any, ref: any) => <ArrowDownward {...props} ref={ref} />),
 		ThirdStateCheck: forwardRef((props: any, ref: any) => <Remove {...props} ref={ref} />),
 		ViewColumn: forwardRef((props: any, ref: any) => <ViewColumn {...props} ref={ref} />)
 	};
-
-	// 'const dispatch = useDispatch()
-	// useEffect(() => {
-	// 	token = localStorageApi.getToken();
-	// 	dispatch(tableDrawingTC());
-	// }, []);'
 
 	const tableDrawing = useSelector((store: AppStateType) => store.tableDrawingPage.table);
 	console.log(tableDrawing);
@@ -102,7 +101,7 @@ export default function TableCards() {
 	// statusText: "OK"
 	// __proto__: Object
 
-	const [state, setState] = React.useState<TableState>({
+	const [state, setState] = useState<TableState>({
 		columns: [
 			{ title: 'Name', field: 'name' },
 			{ title: 'Grade', field: 'grade' },
@@ -121,8 +120,9 @@ export default function TableCards() {
 			// data={state.data}
 			data={query =>
 				new Promise((resolve, reject) => {
-					setProfile();
-					token = localStorageApi.getToken();
+					
+					console.log(token)
+					debugger
 					let url = `https://cards-nya-back.herokuapp.com/1.0/cards/pack/?token=${token}`;
 					url += '&pageCount=' + query.pageSize;
 					url += '&page=' + (query.page + 1);
