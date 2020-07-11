@@ -39,12 +39,17 @@ interface TableState {
 export default function TableCards() {
 
 	// let token: string | null = useSelector((store: AppStateType) => store.tableDrawingPage.token);
-	let token: any = document.cookie;
-	const dispatch = useDispatch();
-	useEffect(() => {
-		token = localStorageApi.getToken();
-    dispatch(tableDrawingTC());
-	})
+	let token: any = localStorageApi.getToken();
+
+	// const dispatch = useDispatch();
+	// const [firstRendering, setFirstRendering] = useState(true);
+	
+	// useEffect(() => {
+	// 	if (firstRendering) {
+	// 		dispatch(tableDrawingTC());
+	// 		setFirstRendering(false);
+	// 	}
+	// }, [])
 
 	const tableIcons: any = {
 		Add: forwardRef((props: any, ref: any) => <AddBox {...props} ref={ref} />),
@@ -120,21 +125,20 @@ export default function TableCards() {
 			// data={state.data}
 			data={query =>
 				new Promise((resolve, reject) => {
-					
-					console.log(token)
-					debugger
-					let url = `https://cards-nya-back.herokuapp.com/1.0/cards/pack/?token=${token}`;
+				let tableToken = {token};
+
+					let url = `https://cards-nya-back.herokuapp.com/1.0/cards/pack/?token=${tableToken.token}`;
 					url += '&pageCount=' + query.pageSize;
 					url += '&page=' + (query.page + 1);
 					fetch(url)
 						.then(response => response.json())
 						.then(result => {
-							console.log(result);
-
+							localStorageApi.setToken(result.token);
+							tableToken.token = result.token;
 							resolve({
 								data: result.cardPacks,
 								page: result.page - 1,
-								totalCount: result.cardPacksTotalCount,
+								totalCount: result.cardPacksTotalCount
 							});
 						});
 				})

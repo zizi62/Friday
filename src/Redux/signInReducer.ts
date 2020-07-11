@@ -53,7 +53,8 @@ export const signInSuccess = (email: string, password: string, rememberMe: boole
   try {
     let response = await signInApi.signIn(email, password, rememberMe)
     dispatch(setAuthSuccess(true))
-    dispatch(setTokenSuccess(response.data.token))
+		dispatch(setTokenSuccess(response.data.token))
+		localStorageApi.setToken(response.data.token);
   } catch (error) {
     if (error.response) {
       dispatch(setError(error.response.data.error))
