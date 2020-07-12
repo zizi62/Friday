@@ -39,11 +39,11 @@ interface TableState {
 export default function TableCards() {
 
 	// let token: string | null = useSelector((store: AppStateType) => store.tableDrawingPage.token);
-	let token: any = localStorageApi.getToken();
+	// let token: any = localStorageApi.getToken();
 
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	// const [firstRendering, setFirstRendering] = useState(true);
-	
+
 	// useEffect(() => {
 	// 	if (firstRendering) {
 	// 		dispatch(tableDrawingTC());
@@ -71,8 +71,8 @@ export default function TableCards() {
 		ViewColumn: forwardRef((props: any, ref: any) => <ViewColumn {...props} ref={ref} />)
 	};
 
-	const tableDrawing = useSelector((store: AppStateType) => store.tableDrawingPage.table);
-	console.log(tableDrawing);
+	// const tableDrawing = useSelector((store: AppStateType) => store.tableDrawingPage.table);
+	// console.log(tableDrawing);
 
 	// 	cardsCount: 0
 	// created: "2020-07-07T15:43:43.340Z"
@@ -114,33 +114,58 @@ export default function TableCards() {
 			{ title: 'Updated', field: 'updated' },
 			{ title: 'User name', field: 'user_name' }
 		],
-		data: tableDrawing,
+		// data: tableDrawing,
+		data: []
 	});
+
+	// const cardPacks = useSelector((store: AppStateType) => store.tableDrawingPage.cardPacks);
+	// const page = useSelector((store: AppStateType) => store.tableDrawingPage.page);
+	// const cardPacksTotalCount = useSelector((store: AppStateType) => store.tableDrawingPage.cardPacksTotalCount);
+	// const promise = useSelector((store: AppStateType) => store.tableDrawingPage.promise);
+
+	// const getData = (page: any, pageSize: any) => {
+	// 	return dispatch(tableDrawingTC(pageSize, page + 1));
+
+	// };
 
 	return (
 		<MaterialTable
 			icons={tableIcons}
-			title="Editable Example"
+			title="Cards"
 			columns={state.columns}
 			// data={state.data}
 			data={query =>
-				new Promise((resolve, reject) => {
-				let tableToken = {token};
+				// new Promise((resolve, reject) => {
+				// 	dispatch(tableDrawingTC(query.pageSize, query.page + 1));
+				// 	console.log(promise);
+				// 			promise.then((data: any) => {
+				// 			console.log(data)
+				// 		resolve({
+				// 			data: data.cardPacks,
+				// 			page: data.page - 1,
+				// 			totalCount: data.cardPacksTotalCount
+				// 		});
+				// 	});
+				// })
 
-					let url = `https://cards-nya-back.herokuapp.com/1.0/cards/pack/?token=${tableToken.token}`;
+
+				new Promise((resolve, reject) => {
+					let token: any = localStorageApi.getToken();
+					let url = `https://cards-nya-back.herokuapp.com/1.0/cards/pack/?token=${token}`;
 					url += '&pageCount=' + query.pageSize;
 					url += '&page=' + (query.page + 1);
 					fetch(url)
 						.then(response => response.json())
 						.then(result => {
 							localStorageApi.setToken(result.token);
-							tableToken.token = result.token;
-							resolve({
-								data: result.cardPacks,
-								page: result.page - 1,
-								totalCount: result.cardPacksTotalCount
-							});
+							token = result.token;
+					
+						resolve({
+							data: result.cardPacks,
+							page: result.page - 1,
+							totalCount: result.cardPacksTotalCount
 						});
+					})
 				})
 			}
 			editable={{
