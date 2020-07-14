@@ -38,7 +38,7 @@ const SignInContainer: React.FC<SignInContainerPropsType> = () => {
         setEmailValue(e.currentTarget.value)
         dispatch(setErrorMessage(''))
 
-    }, [setEmailValue]);
+    }, [setEmailValue, dispatch]);
     const setPassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setPasswordValue(e.currentTarget.value)
         dispatch(setErrorMessage(''))

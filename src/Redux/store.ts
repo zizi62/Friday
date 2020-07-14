@@ -5,7 +5,7 @@ import { forgotPasswordReducer } from "./forgotPasswordReducer";
 import { registrationReducer } from "./registrationReducer";
 import { setNewPasswordReducer } from "./setNewPasswordReducer";
 import { signInReducer } from "./signInReducer";
-import { tableZiziRaducer } from "./tableZiziReducer";
+import { tableZiziRaducer } from "./ziziPacksReducer";
 
 
 const rootReducer = combineReducers({

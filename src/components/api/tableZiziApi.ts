@@ -1,5 +1,5 @@
 import axios from "axios";
-import { cardPacksType } from "../../Redux/tableZiziReducer";
+import { cardPacksType } from "../../Redux/ziziPacksReducer";
 
 
 
@@ -18,7 +18,6 @@ type getTableType =  getTableDataType & {error: string}
 
 export const tableApi = {   
          async getTable(token: string) {
-             debugger
              return await instance.get<getTableType>( `/cards/pack?token=${token}`)
           
         },   

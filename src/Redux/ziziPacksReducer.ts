@@ -11,8 +11,8 @@ const SET_PACK = 'tableZiziReducer/SET_PACK'
 const SET_ERROR = 'tableZiziReducer/SET_ERROR'
 
 export type packType = {
-  // _id: string
-  // user_id: string
+  _id: string
+  user_id: string
   name: string
   // path: string
   // grade: number
@@ -21,33 +21,35 @@ export type packType = {
   // type: string
   created: string
   updated: string
-  __v: number
-}| {}
-
-export type cardPacksType =  Array<packType> | []
-
-type InitialStateType = {
-  cardPacks : []|cardPacksType
-  error: string
-  pack: {} | packType
-  
+  // __v: number
 }
 
+export type cardPacksType = Array<packType> 
 
-const initialState: InitialStateType = {
-  cardPacks :[],
+
+const initialState = {
+  cardPacks: [] as cardPacksType,
   error: '',
-  pack: {}
+  pageCount: 0,
+  page: 0,
+  token: 0,
+  pack: {
+    _id: '',
+    name: '',
+    created: '',
+    updated: '',
+    user_id: ''
+  }
 };
 
-// export type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 
 export const tableZiziRaducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
   switch (action.type) {
     case SET_CARDPACKS:
       return {
         ...state,
-        cardPacks: [...state.cardPacks, action.cardPacks]
+        cardPacks: action.cardPacks
       }
     case SET_PACK:
       return {
@@ -88,12 +90,12 @@ const setError = (error: string): setErrorActionType => ({ type: SET_ERROR, erro
 
 
 export const setTableData = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
-  debugger
   try {
     let token = localStorageApi.getToken() || ''
     let response = await tableApi.getTable(token)
     dispatch(setTableSuccess(response.data.cardPacks))
     dispatch(setTokenSuccess(response.data.token))
+    localStorageApi.setToken(response.data.token)
   } catch (error) {
     if (error.response) {
       dispatch(setError(error.response.data.error))
