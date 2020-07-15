@@ -11,7 +11,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import SearchIcon from '@material-ui/icons/Search';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import { IconButton, Typography, TextField } from '@material-ui/core';
+import { IconButton, Typography, TextField, ButtonGroup, Button } from '@material-ui/core';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles({
   table: {
@@ -44,25 +46,31 @@ const TableZ: React.FC<TablePropsType> = (props: TablePropsType) => {
   let tableField = colums.map((c => c.field))
 
   const setSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.currentTarget.value) 
-    alert(searchText) 
-}, [setSearchText,searchText ])
+    setSearchText(e.currentTarget.value)
+    alert(searchText)
+  }, [setSearchText, searchText])
 
-const getSearchText = useCallback(() => {
-  searchItem(searchText)  
-}, [searchItem,searchText ])
+  const getSearchText = useCallback(() => {
+    searchItem(searchText)
+  }, [searchItem, searchText])
 
 
 
   return (
     <TableContainer component={Paper}>
       <Typography>{tableTitle}</Typography>
-      <IconButton ><AddBoxIcon color='primary'/></IconButton>
-      <TextField id="standard-search" label="Search field" type="search" onChange = {setSearch}/> <IconButton onClick={getSearchText}> <SearchIcon color='primary' /> </IconButton>
+      <IconButton ><AddBoxIcon color='primary' /></IconButton>
+      <TextField id="standard-search" label="Search field" type="search" onChange={setSearch} /> <IconButton onClick={getSearchText}> <SearchIcon color='primary' /> </IconButton>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            {tableHead.map((t) => <TableCell >{t}</TableCell>)}
+            {tableHead.map((t) => <TableCell>{t}<ButtonGroup
+              orientation="vertical"
+              color="primary"
+              aria-label="vertical outlined primary button group">
+              <ExpandLessIcon />
+              <ExpandMoreIcon />
+            </ButtonGroup></TableCell>)}
             <TableCell align="right">action</TableCell>
           </TableRow>
         </TableHead>
@@ -72,7 +80,7 @@ const getSearchText = useCallback(() => {
               {tableField.map((t, i) => <TableCell key={i} component="th" scope="row">{pack[t]}</TableCell>)}
               <TableCell component="th" scope="row" align="right">
                 <IconButton onClick={() => editItem(pack)}> <EditIcon color='primary' /> </IconButton>
-                <IconButton onClick={() => deletItem(pack)}><DeleteOutlineIcon color='primary' /> </IconButton>
+                <IconButton onClick={() => deletItem(pack)}><DeleteOutlineIcon color='primary' /></IconButton>
               </TableCell>
             </TableRow>
           ))}
