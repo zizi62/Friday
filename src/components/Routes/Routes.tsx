@@ -6,6 +6,7 @@ import ForgotPasswordPage from '../ForgotPasswordPage/ForgotPasswordPage';
 import SignInPage from '../SignInPage/SignInPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import PacksTable from '../ziziPacksPage/PacksTable';
+import TableCards from './../table/TableCards';
 
 
 export const SIGN_IN_PATH = '/';
@@ -25,7 +26,9 @@ const Routes: React.FC = () => {
 			<Route path={FORGOT_PASSWORD_PATH} component={ForgotPasswordPage} />
 			<Route path={SET_NEW_PASSWORD_PATH} component={SetNewPasswordContainer} />
 			<Route path={PROFILE_PATH} component={ProfilePage} />
+			<Route path={TABLE_CARDS} component={TableCards} />
 			<Route path={TABLE_ZIZICARDS} component={PacksTable} />
+
 		</>
 	);
 };
