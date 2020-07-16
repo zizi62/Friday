@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export type ICardPacks = Array<ICard>
+export type ICardPacks = {
+    cardPacks: ICard[]
+}
 
 export type ICard = {
     cardsCount: number
@@ -24,8 +26,10 @@ const instance = axios.create({
     baseURL: 'https://cards-nya-back.herokuapp.com/1.0/'
 });
 
+const token = `26b39a60-33c5-11ea-be77-e79e9eaf6e2e`;
+
 export const packsApi = {
     fetchPacks(): Promise<any> {
-        return instance.get<any>('cards/pack').then(res => res.data.cardPacks)
+        return instance.get<ICardPacks>('cards/pack', {headers: { token }}).then(res => res.data.cardPacks);
     }
 };

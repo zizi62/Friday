@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import {withStyles, Theme, createStyles, makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -33,17 +33,17 @@ const StyledTableRow = withStyles((theme: Theme) =>
     }),
 )(TableRow);
 
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+// function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
+//     return {name, calories, fat, carbs, protein};
+// }
+//
+// const rows = [
+//     createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+//     createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+//     createData('Eclair', 262, 16.0, 24, 6.0),
+//     createData('Cupcake', 305, 3.7, 67, 4.3),
+//     createData('Gingerbread', 356, 16.0, 49, 3.9),
+// ];
 
 const useStyles = makeStyles({
     table: {
@@ -54,7 +54,7 @@ const useStyles = makeStyles({
 const PacksPage = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const packs = useSelector((state: AppStateType) => state.packs);
+    const packs = useSelector((state: AppStateType) => state.cardPacks.packs);
 
     useEffect(() => {
         dispatch(getPacks())
@@ -74,17 +74,20 @@ const PacksPage = () => {
                 </TableHead>
                 <TableBody>
 
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row">
-                                {row.name}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                            <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                            <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                            <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                        </StyledTableRow>
-                    ))}
+                    {/*{(packs.length === 0)*/}
+                    {/*    ? <p>Loading</p>*/}
+                    {/*    : packs.map((pack) => (*/}
+                    {/*        <StyledTableRow key={pack.name}>*/}
+                    {/*            <StyledTableCell component="th" scope="row">*/}
+                    {/*                {pack.name}*/}
+                    {/*            </StyledTableCell>*/}
+                    {/*            <StyledTableCell align="right">{pack.grade}</StyledTableCell>*/}
+                    {/*            <StyledTableCell align="right">{pack.rating}</StyledTableCell>*/}
+                    {/*            <StyledTableCell align="right">{pack.shots}</StyledTableCell>*/}
+                    {/*            <StyledTableCell align="right">{pack.created}</StyledTableCell>*/}
+                    {/*        </StyledTableRow>*/}
+                    {/*    ))*/}
+                    {/*}*/}
                 </TableBody>
             </Table>
         </TableContainer>
@@ -93,6 +96,22 @@ const PacksPage = () => {
 
 export default PacksPage;
 
+
+// cardsCount: 0
+// created: "2020-07-04T06:41:50.420Z"
+// deckCover: "some cover"
+// grade: 0
+// name: "no Name"
+// path: "/def"
+// private: false
+// rating: 0
+// shots: 0
+// type: "pack"
+// updated: "2020-07-04T06:41:50.420Z"
+// user_id: "5eecf82a3ed8f700042f1186"
+// user_name: "3"
+// __v: 0
+// _id: "5f0024aefbb5de0004fb4fd8"
 
 
 

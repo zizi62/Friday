@@ -1,16 +1,21 @@
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./store";
-import {ICardPacks, packsApi} from "../components/api/packsApi";
+import {ICard, ICardPacks, packsApi} from "../components/api/packsApi";
 
 const GET_PACKS_SUCCESS = "GET_PACKS_SUCCESS";
 
+// interface IInitialState {
+//     packs: [] | ICard[]
+// // }
+
 const initialState = {
-    packs: []
+    packs: [] as ICard[]
 };
 
-export type InitialStateType = typeof initialState;
+type IInitialState  = typeof initialState
 
-export const packsReducer = (state = initialState, action: ActionType): InitialStateType => {
+
+export const packsReducer = (state: IInitialState = initialState, action: ActionType): IInitialState => {
     switch (action.type) {
         case GET_PACKS_SUCCESS:
             return {
@@ -24,12 +29,12 @@ export const packsReducer = (state = initialState, action: ActionType): InitialS
 
 type IGetPacksSuccess = {
     type: typeof GET_PACKS_SUCCESS
-    packs: [] | ICardPacks
+    packs: ICard[]
 }
 
 type ActionType = IGetPacksSuccess
 
-export const getPacksSuccess = (packs: ICardPacks): IGetPacksSuccess => {
+export const getPacksSuccess = (packs: ICard[]): IGetPacksSuccess => {
     return {
         type: GET_PACKS_SUCCESS,
         packs
@@ -37,12 +42,14 @@ export const getPacksSuccess = (packs: ICardPacks): IGetPacksSuccess => {
 };
 
 // ******* ThunkCreator *******
-type ThunkActionType = ThunkAction<Promise<void>, AppStateType, unknown, any>
+type ThunkActionType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 
 export const getPacks = (): ThunkActionType => async (dispatch) => {
     try {
         const packs = await packsApi.fetchPacks();
-        dispatch(getPacksSuccess(packs))
+        debugger
+        dispatch(getPacksSuccess(packs));
+
     } catch (e) {
 
     }

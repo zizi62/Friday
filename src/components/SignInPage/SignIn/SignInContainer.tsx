@@ -16,7 +16,6 @@ const SignInContainer: React.FC<SignInContainerPropsType> = () => {
     const [email, setEmailValue] = useState<string>('')
     const [password, setPasswordValue] = useState<string>('')
     const [rememberMe, setRememberMeValue] = useState<boolean>(false)
-    // const [error, setError] = useState<string>('')
 
     const dispatch = useDispatch();
     const signIn = useCallback(

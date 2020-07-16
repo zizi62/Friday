@@ -12,10 +12,7 @@ type SignInPageType = {
 }
 
 const SignInPage : React.FC<SignInPageType>=()=>{
-
     const isAuth = useSelector((store: AppStateType) => store.signInPage.isAuth);
-
- 
     return <>
       {isAuth && <Redirect to={PROFILE_PATH} />}  
         <SignInContainer/>

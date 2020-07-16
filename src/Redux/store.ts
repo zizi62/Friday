@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
     registrationPage: registrationReducer,
     setNewPasswordPage: setNewPasswordReducer,
     signInPage: signInReducer,
-    packs: packsReducer
+    cardPacks: packsReducer
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>
