@@ -1,7 +1,4 @@
-import axios from "axios";
-
-
-const instance = axios.create({baseURL: 'https://cards-nya-back.herokuapp.com/1.0/'});
+import instance from "./instance";
 
 export const forgotPassApi = {
 	async forgotPass(email: string) {

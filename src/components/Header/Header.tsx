@@ -21,7 +21,8 @@ import {
 	FORGOT_PASSWORD_PATH,
 	SET_NEW_PASSWORD_PATH,
 	PROFILE_PATH,
-	TABLE_CARDS
+	TABLE_CARDS,
+	TABLE_ZIZICARDS
 } from '../Routes/Routes';
 >>>>>>> 29348944542424df447e086e48fae9acad02bf11
 
@@ -71,6 +72,7 @@ const Header: React.FC<HeaderPropsType> = () => {
 					<NavLink className={style.link} to={SET_NEW_PASSWORD_PATH}>SET NEW PASSWORD</NavLink>
 					<NavLink className={style.link} to={PROFILE_PATH}>PROFILE</NavLink>
 					<NavLink className={style.link} to={TABLE_CARDS}>CARDS</NavLink>
+					<NavLink className={style.link} to={TABLE_ZIZICARDS}>ZIZICARDS</NavLink>
 				</>
 			}
 		</div>
