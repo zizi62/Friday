@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { setTableData } from "../../Redux/ziziPacksReducer";
 import TableZ from "../common/ziziTable/ziziTable";
 import React from "react";
+import { TABLE_ZIZICARDS } from "../Routes/Routes";
 
 type ZiziPacksTablePropsType = {
 
@@ -11,7 +12,7 @@ type ZiziPacksTablePropsType = {
 
 const PacksTable: React.FC<ZiziPacksTablePropsType> = () => {
 
-  const tableData = useSelector((store: AppStateType) => store.tablePage.cardPacks);
+  const tableData = useSelector((store: AppStateType) => store.tablePakcsPage.cardPacks);
 
   const dispatch = useDispatch();
 
@@ -44,7 +45,14 @@ const PacksTable: React.FC<ZiziPacksTablePropsType> = () => {
 
 
   return <>
-    <TableZ tableData={tableData} colums = {columns} tableTitle='Packs' editItem={editItem} deletItem =  {deletItem} searchItem = {searchItem}>
+    <TableZ tableData={tableData} 
+    colums = {columns} 
+    tableTitle= 'Packs' 
+    editItem= {editItem} 
+    deletItem = {deletItem} 
+    searchItem ={searchItem} 
+    link ={TABLE_ZIZICARDS} 
+    linkButton = {'See Cards'}>
 
     </TableZ>
   </>

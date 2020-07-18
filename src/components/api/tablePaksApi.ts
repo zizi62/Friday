@@ -16,10 +16,9 @@ type getTableDataType = {
 
 type getTableType =  getTableDataType & {error: string}
 
-export const tableApi = {   
+export const tablePacksApi = {   
          async getTable(token: string) {
              return await instance.get<getTableType>( `/cards/pack?token=${token}`)
-          
         },   
         async setNewPack(newPack: {}, token:string){
             return await instance.post(`/cards/pack`, {token, newPack})

@@ -7,6 +7,7 @@ import SignInPage from '../SignInPage/SignInPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import PacksTable from '../ziziPacksPage/PacksTable';
 import TableCards from './../table/TableCards';
+import CardsTable from '../ziziCardsPage/CardsTable';
 
 
 export const SIGN_IN_PATH = '/';
@@ -15,8 +16,8 @@ export const FORGOT_PASSWORD_PATH = '/forgot-password';
 export const SET_NEW_PASSWORD_PATH = '/set-new-password';
 export const PROFILE_PATH = '/profile';
 export const TABLE_CARDS = '/cards';
-export const TABLE_ZIZICARDS = '/zizicards'
-
+export const TABLE_ZIZIPARDS = '/ziziPacks'
+export const TABLE_ZIZICARDS = '/ziziCards/'
 
 const Routes: React.FC = () => {
 	return (
@@ -27,7 +28,8 @@ const Routes: React.FC = () => {
 			<Route path={SET_NEW_PASSWORD_PATH} component={SetNewPasswordContainer} />
 			<Route path={PROFILE_PATH} component={ProfilePage} />
 			<Route path={TABLE_CARDS} component={TableCards} />
-			<Route path={TABLE_ZIZICARDS} component={PacksTable} />
+			<Route path={TABLE_ZIZIPARDS} component={PacksTable} />
+			<Route path={`${TABLE_ZIZICARDS}/:id?`} component={CardsTable} />
 
 		</>
 	);

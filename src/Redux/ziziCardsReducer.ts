@@ -1,4 +1,7 @@
 import { Dispatch } from "redux"
+import { localStorageApi } from "../components/api/profileApi"
+import { AppStateType } from "./store"
+import { tableCardsApi } from "../components/api/tableCardsApi"
 
 
 const SET_CARDS = 'ziziCardsReducer/SET_CARDS'
@@ -49,7 +52,7 @@ const initialState = {
 
 export type InitialStateType = typeof initialState;
 
-export const tableZiziRaducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+export const ziziCardsReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
   switch (action.type) {
     case SET_CARDS:
       return {
@@ -94,21 +97,21 @@ export const setNewCard = (card: cardType): setCardActionType => ({ type: SET_CA
 const setError = (error: string): setErrorActionType => ({ type: SET_ERROR, error: error, isAuth: false })
 
 
-// export const setTableData = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
-//   try {
-//     let token = localStorageApi.getToken() || ''
-//     let response = await tableApi.getTable(token)
-//     dispatch(setTableSuccess(response.data.cardPacks))
-//     dispatch(setTokenSuccess(response.data.token))
-//     localStorageApi.setToken(response.data.token)
-//   } catch (error) {
-//     if (error.response) {
-//       dispatch(setError(error.response.data.error))
-//     } else {
-//       dispatch(setError('Some ERROR'))
-//     }
-//   }
-// }
+export const setTableData = (cardsPack_id: string) => async (dispatch: Dispatch, getState: () => AppStateType) => {
+  try {
+    debugger
+    let token = localStorageApi.getToken() || ''
+    let response = await tableCardsApi.getCards(token, cardsPack_id)
+    dispatch(setTableSuccess(response.data.cards))
+    localStorageApi.setToken(response.data.token)
+  } catch (error) {
+    if (error.response) {
+      dispatch(setError(error.response.data.error))
+    } else {
+      dispatch(setError('Some ERROR'))
+    }
+  }
+}
 
 // export const setNewPackData = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
 //   try {

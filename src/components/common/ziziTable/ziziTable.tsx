@@ -14,6 +14,7 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import { IconButton, Typography, TextField, ButtonGroup, Button } from '@material-ui/core';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   table: {
@@ -25,6 +26,8 @@ const useStyles = makeStyles({
 type TablePropsType = {
   tableTitle: string
   tableData: Array<any>
+  link : string
+  linkButton:string
   colums: Array<{
     title: string,
     field: string
@@ -38,7 +41,7 @@ type TablePropsType = {
 const TableZ: React.FC<TablePropsType> = (props: TablePropsType) => {
   const classes = useStyles();
 
-  const { tableData, tableTitle, colums, editItem, deletItem, searchItem } = props
+  const { tableData, tableTitle, colums, link,linkButton, editItem, deletItem, searchItem } = props
 
   const [searchText, setSearchText] = useState('')
 
@@ -81,6 +84,9 @@ const TableZ: React.FC<TablePropsType> = (props: TablePropsType) => {
               <TableCell component="th" scope="row" align="right">
                 <IconButton onClick={() => editItem(pack)}> <EditIcon color='primary' /> </IconButton>
                 <IconButton onClick={() => deletItem(pack)}><DeleteOutlineIcon color='primary' /></IconButton>
+                {console.log(link)}
+                {console.log(link + pack._id)}
+                <NavLink  to={`${link}/${pack._id}`}><Button>{linkButton}</Button></NavLink>
               </TableCell>
             </TableRow>
           ))}

@@ -23,16 +23,11 @@ import { localStorageApi } from '../api/profileApi';
 
 
 
-interface Row {
-	name: string;
-	surname: string;
-	birthYear: number;
-	birthCity: number;
-};
+
 
 interface TableState {
-	columns: any;
-	data: any;
+	columns: Array<object>;
+	data: Array<object>;
 };
 
 

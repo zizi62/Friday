@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { setTokenSuccess } from "./profileReducer";
-import { tableApi } from "../components/api/tableZiziApi";
+import { tablePacksApi } from "../components/api/tablePaksApi";
 import { AppStateType } from "./store";
 import { localStorageApi } from "../components/api/profileApi";
 
@@ -44,7 +44,7 @@ const initialState = {
 
 export type InitialStateType = typeof initialState;
 
-export const tableZiziRaducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+export const ziziPacksReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
   switch (action.type) {
     case SET_CARDPACKS:
       return {
@@ -92,7 +92,7 @@ const setError = (error: string): setErrorActionType => ({ type: SET_ERROR, erro
 export const setTableData = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
   try {
     let token = localStorageApi.getToken() || ''
-    let response = await tableApi.getTable(token)
+    let response = await tablePacksApi.getTable(token)
     dispatch(setTableSuccess(response.data.cardPacks))
     dispatch(setTokenSuccess(response.data.token))
     localStorageApi.setToken(response.data.token)
@@ -108,7 +108,7 @@ export const setTableData = () => async (dispatch: Dispatch, getState: () => App
 export const setNewPackData = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
   try {
     let token = localStorageApi.getToken() || ''
-    let response = await tableApi.getTable(token)
+    let response = await tablePacksApi.getTable(token)
     dispatch(setTableSuccess(response.data.cardPacks))
     dispatch(setTokenSuccess(response.data.token))
   } catch (error) {
