@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { AppStateType } from "../../Redux/store";
-import { useEffect } from "react";
-import { setTableData } from "../../Redux/ziziPacksReducer";
+import { useEffect, useCallback } from "react";
+import { setTableData, setNewPackData } from "../../Redux/ziziPacksReducer";
 import TableZ from "../common/ziziTable/ziziTable";
 import React from "react";
 import { TABLE_ZIZICARDS } from "../Routes/Routes";
@@ -41,7 +41,11 @@ const PacksTable: React.FC<ZiziPacksTablePropsType> = () => {
   const searchItem = (text: string) =>{
     alert(text)
   }
+  const addNewPack = useCallback(() => {
+    alert(123)
+    dispatch(setNewPackData())
 
+}, [dispatch, setNewPackData]);
 
 
   return <>
@@ -51,6 +55,7 @@ const PacksTable: React.FC<ZiziPacksTablePropsType> = () => {
     editItem= {editItem} 
     deletItem = {deletItem} 
     searchItem ={searchItem} 
+    addNewItem = {addNewPack}
     link ={TABLE_ZIZICARDS} 
     linkButton = {'See Cards'}>
 

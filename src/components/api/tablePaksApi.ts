@@ -14,14 +14,15 @@ type getTableDataType = {
     token: string
 }
 
-type getTableType =  getTableDataType & {error: string}
+type getTableType =  getTableDataType & {error: string}&{success: boolean, token:string}
 
 export const tablePacksApi = {   
          async getTable(token: string) {
              return await instance.get<getTableType>( `/cards/pack?token=${token}`)
         },   
-        async setNewPack(newPack: {}, token:string){
-            return await instance.post(`/cards/pack`, {token, newPack})
+        async setNewPack(cardsPack: {}, token:string){
+            debugger
+            return await instance.post(`/cards/pack`, {token, cardsPack})
         },
         async deletePack (token:string, id: string){
             return await instance.delete(`/cards/pack`)

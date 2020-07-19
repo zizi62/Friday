@@ -2,6 +2,7 @@ import { Dispatch } from "redux"
 import { localStorageApi } from "../components/api/profileApi"
 import { AppStateType } from "./store"
 import { tableCardsApi } from "../components/api/tableCardsApi"
+import { setTokenSuccess } from "./profileReducer"
 
 
 const SET_CARDS = 'ziziCardsReducer/SET_CARDS'
@@ -113,20 +114,25 @@ export const setTableData = (cardsPack_id: string) => async (dispatch: Dispatch,
   }
 }
 
-// export const setNewPackData = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
-//   try {
-//     let token = localStorageApi.getToken() || ''
-//     let response = await tableApi.getTable(token)
-//     dispatch(setTableSuccess(response.data.cardPacks))
-//     dispatch(setTokenSuccess(response.data.token))
-//   } catch (error) {
-//     if (error.response) {
-//       dispatch(setError(error.response.data.error))
-//     } else {
-//       dispatch(setError('Some ERROR'))
-//     }
-//   }
-// }
+export const setNewCardData = (cardsPack_id: string) => async (dispatch: Dispatch, getState: () => AppStateType) => {
+
+  try {
+    let token = localStorageApi.getToken() || ''
+    debugger
+    let response = await tableCardsApi.setNewCard({cardsPack_id : cardsPack_id }, token);
+    if(response.data.success){
+      
+    }
+    dispatch(setTableSuccess(response.data.cardPacks))
+    dispatch(setTokenSuccess(response.data.token))
+  } catch (error) {
+    if (error.response) {
+      dispatch(setError(error.response.data.error))
+    } else {
+      dispatch(setError('Some ERROR'))
+    }
+  }
+}
 
 export const setErrorMessage = (error: string) => (dispatch: Dispatch) => {
   dispatch(setError(error))

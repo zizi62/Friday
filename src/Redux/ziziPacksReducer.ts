@@ -6,9 +6,9 @@ import { localStorageApi } from "../components/api/profileApi";
 
 
 
-const SET_CARDPACKS = 'tableZiziReducer/SET_CARDPACKS'
-const SET_PACK = 'tableZiziReducer/SET_PACK'
-const SET_ERROR = 'tableZiziReducer/SET_ERROR'
+const SET_CARDPACKS = 'ziziPacksReducer/SET_CARDPACKS'
+const SET_PACK = 'ziziPacksReducer/SET_PACK'
+const SET_ERROR = 'ziziPacksReducer/SET_ERROR'
 
 export type packType = {
   _id: string
@@ -107,10 +107,18 @@ export const setTableData = () => async (dispatch: Dispatch, getState: () => App
 
 export const setNewPackData = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
   try {
+    debugger
     let token = localStorageApi.getToken() || ''
-    let response = await tablePacksApi.getTable(token)
-    dispatch(setTableSuccess(response.data.cardPacks))
-    dispatch(setTokenSuccess(response.data.token))
+    let response = await tablePacksApi.setNewPack({name: 'ziziPack'}, token)
+    if(response.data.success){
+      let packsResponse = await tablePacksApi.getTable(response.data.token)
+      dispatch(setTableSuccess(packsResponse.data.cardPacks))
+      localStorageApi.setToken(packsResponse.data.token)
+      dispatch(setTokenSuccess(response.data.token))
+    }
+    
+    
+   
   } catch (error) {
     if (error.response) {
       dispatch(setError(error.response.data.error))

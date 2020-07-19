@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { AppStateType } from "../../Redux/store";
-import { useEffect } from "react";
-import { setTableData } from "../../Redux/ziziCardsReducer";
+import { useEffect, useCallback } from "react";
+import { setTableData, setNewCardData } from "../../Redux/ziziCardsReducer";
 import TableZ from "../common/ziziTable/ziziTable";
 import React from "react";
 import { TABLE_ZIZICARDS } from "../Routes/Routes";
@@ -41,8 +41,13 @@ const CardsTable: React.FC<ZiziCacksTablePropsType> = (props: any) => {
         alert(text)
     }
 
+    const addNewCard = useCallback(() => {
+        dispatch(setNewCardData(id))
+
+    }, [dispatch, setNewCardData]);
+
     return <>
-        <TableZ tableData={tableData} colums={columns} tableTitle='Cards' editItem={editItem} deletItem={deletItem} searchItem={searchItem}
+        <TableZ tableData={tableData} colums={columns} tableTitle='Cards' editItem={editItem} deletItem={deletItem} searchItem={searchItem} addNewItem={addNewCard}
             link={TABLE_ZIZICARDS}
             linkButton={'Learn'}>
         </TableZ>

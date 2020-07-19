@@ -16,7 +16,7 @@ type getCardsType = {
     token: string
 }
 
-type getCardsDataType =  getCardsType & {error: string}
+type getCardsDataType =  getCardsType & {error: string}&{success: boolean, token:string}
 
 export const tableCardsApi = {   
     
