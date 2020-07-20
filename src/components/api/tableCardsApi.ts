@@ -24,11 +24,11 @@ export const tableCardsApi = {
              return await instance.get<getCardsDataType>( `cards/card?token=${token}&cardsPack_id=${cardsPack_id}`)
           
         },   
-        async setNewCard(newCard: {}, token:string){
-            return await instance.post(`cards/card`, {token, newCard})
+        async setNewCard(card: {}, token:string){
+            return await instance.post(`cards/card`, {token, card})
         },
         async deleteCard (token:string, id: string){
-            return await instance.delete(`/cards/pack`)
+            return await instance.delete(`/cards/card`)
         }
 
     }

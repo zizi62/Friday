@@ -115,6 +115,8 @@ export const setNewPackData = () => async (dispatch: Dispatch, getState: () => A
       dispatch(setTableSuccess(packsResponse.data.cardPacks))
       localStorageApi.setToken(packsResponse.data.token)
       dispatch(setTokenSuccess(response.data.token))
+    }else {
+      dispatch(setError('Some ERROR'))
     }
     
     

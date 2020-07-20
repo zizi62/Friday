@@ -24,9 +24,11 @@ const CardsTable: React.FC<ZiziCacksTablePropsType> = (props: any) => {
 
 
     const columns = [
-        { title: 'Name', field: 'name' },
+        { title: 'Type', field: 'type' },
         { title: 'Created', field: 'created' },
-        { title: 'Updated', field: 'updated' }
+        { title: 'Rating', field: 'rating' },
+        { title: 'Shots', field: 'shots' },
+        {title: 'Grade', field: 'grade'}
     ]
 
     const editItem = (obj: any) => {
@@ -47,6 +49,7 @@ const CardsTable: React.FC<ZiziCacksTablePropsType> = (props: any) => {
     }, [dispatch, setNewCardData]);
 
     return <>
+    
         <TableZ tableData={tableData} colums={columns} tableTitle='Cards' editItem={editItem} deletItem={deletItem} searchItem={searchItem} addNewItem={addNewCard}
             link={TABLE_ZIZICARDS}
             linkButton={'Learn'}>

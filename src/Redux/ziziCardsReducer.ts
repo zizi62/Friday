@@ -119,12 +119,16 @@ export const setNewCardData = (cardsPack_id: string) => async (dispatch: Dispatc
   try {
     let token = localStorageApi.getToken() || ''
     debugger
-    let response = await tableCardsApi.setNewCard({cardsPack_id : cardsPack_id }, token);
+    let response = await tableCardsApi.setNewCard({cardsPack_id : cardsPack_id, type:'ziziCards' }, token);
     if(response.data.success){
-      
+      let cardsResponse = await tableCardsApi.getCards(response.data.token, cardsPack_id)
+      dispatch(setTableSuccess(cardsResponse.data.cards))
+    dispatch(setTokenSuccess(cardsResponse.data.token))
+    localStorageApi.setToken(cardsResponse.data.token)
+    }else{
+      dispatch(setError('Some ERROR'))
     }
-    dispatch(setTableSuccess(response.data.cardPacks))
-    dispatch(setTokenSuccess(response.data.token))
+    
   } catch (error) {
     if (error.response) {
       dispatch(setError(error.response.data.error))
