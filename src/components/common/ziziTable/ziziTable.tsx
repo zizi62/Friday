@@ -87,8 +87,6 @@ const TableZ: React.FC<TablePropsType> = (props: TablePropsType) => {
               <TableCell component="th" scope="row" align="right">
                 <IconButton onClick={() => editItem(pack)}> <EditIcon color='primary' /> </IconButton>
                 <IconButton onClick={() => deletItem(pack)}><DeleteOutlineIcon color='primary' /></IconButton>
-                {console.log(link)}
-                {console.log(link + pack._id)}
                 <NavLink  to={`${link}/${pack._id}`}><Button>{linkButton}</Button></NavLink>
               </TableCell>
             </TableRow>

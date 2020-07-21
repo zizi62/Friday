@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { AppStateType } from "../../Redux/store";
 import { useEffect, useCallback } from "react";
-import { setTableData, setNewPackData } from "../../Redux/ziziPacksReducer";
+import { setTableData, setNewPackData, deletePack, packType } from "../../Redux/ziziPacksReducer";
 import TableZ from "../common/ziziTable/ziziTable";
 import React from "react";
 import { TABLE_ZIZICARDS } from "../Routes/Routes";
@@ -34,9 +34,10 @@ const PacksTable: React.FC<ZiziPacksTablePropsType> = () => {
     alert(obj.user_name)
   }
 
-  const deletItem = (obj: any)=>{
-    alert(obj._id)
-  }
+  const deletItem = useCallback((pack: packType)=>{
+    dispatch(deletePack(pack._id))
+  }, [dispatch, deletePack])
+  
 
   const searchItem = (text: string) =>{
     alert(text)

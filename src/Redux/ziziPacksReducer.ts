@@ -107,7 +107,6 @@ export const setTableData = () => async (dispatch: Dispatch, getState: () => App
 
 export const setNewPackData = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
   try {
-    debugger
     let token = localStorageApi.getToken() || ''
     let response = await tablePacksApi.setNewPack({name: 'ziziPack'}, token)
     if(response.data.success){
@@ -118,9 +117,6 @@ export const setNewPackData = () => async (dispatch: Dispatch, getState: () => A
     }else {
       dispatch(setError('Some ERROR'))
     }
-    
-    
-   
   } catch (error) {
     if (error.response) {
       dispatch(setError(error.response.data.error))
@@ -129,6 +125,27 @@ export const setNewPackData = () => async (dispatch: Dispatch, getState: () => A
     }
   }
 }
+
+export const deletePack=(id: string)=> async (dispatch: Dispatch) => {
+  try {
+    let token = localStorageApi.getToken() || ''
+    let response = await tablePacksApi.deletePack(token, id)
+    if(response.data.success){
+      let packsResponse = await tablePacksApi.getTable(response.data.token)
+      dispatch(setTableSuccess(packsResponse.data.cardPacks))
+      localStorageApi.setToken(packsResponse.data.token)
+      dispatch(setTokenSuccess(response.data.token))
+    }else {
+      dispatch(setError('Some ERROR'))
+    }
+  } catch (error) {
+    if (error.response) {
+      dispatch(setError(error.response.data.error))
+    } else {
+      dispatch(setError('Some ERROR'))
+    }
+  }
+} 
 
 export const setErrorMessage = (error: string) => (dispatch: Dispatch) => {
   dispatch(setError(error))

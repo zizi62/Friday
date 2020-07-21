@@ -25,10 +25,10 @@ export const tableCardsApi = {
           
         },   
         async setNewCard(card: {}, token:string){
-            return await instance.post(`cards/card`, {token, card})
+            return await instance.post<getCardsDataType>(`cards/card`, {token, card})
         },
         async deleteCard (token:string, id: string){
-            return await instance.delete(`/cards/card`)
+            return await instance.delete<getCardsDataType>(`/cards/card?token=${token}&id=${id}`)
         }
 
-    }
+}

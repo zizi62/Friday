@@ -25,7 +25,7 @@ export const tablePacksApi = {
             return await instance.post(`/cards/pack`, {token, cardsPack})
         },
         async deletePack (token:string, id: string){
-            return await instance.delete(`/cards/pack`)
+            return await instance.delete(`/cards/pack?token=${token}&id=${id}`)
         }
 
     }

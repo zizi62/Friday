@@ -37,17 +37,17 @@ const initialState = {
   maxGrade: 0,
   minGrade: 0,
   card: {
-  answer: '',
-  question: '',
-  cardsPack_id: '',
-  grade: 0,
-  rating: 0,
-  shots: 0,
-  type: '',
-  created: '',
-  updated: '',
-  __v: 0,
-  _id: ''
+    answer: '',
+    question: '',
+    cardsPack_id: '',
+    grade: 0,
+    rating: 0,
+    shots: 0,
+    type: '',
+    created: '',
+    updated: '',
+    __v: 0,
+    _id: ''
   }
 };
 
@@ -119,16 +119,38 @@ export const setNewCardData = (cardsPack_id: string) => async (dispatch: Dispatc
   try {
     let token = localStorageApi.getToken() || ''
     debugger
-    let response = await tableCardsApi.setNewCard({cardsPack_id : cardsPack_id, type:'ziziCards' }, token);
-    if(response.data.success){
+    let response = await tableCardsApi.setNewCard({ cardsPack_id: cardsPack_id, type: 'ziziCards' }, token);
+    if (response.data.success) {
       let cardsResponse = await tableCardsApi.getCards(response.data.token, cardsPack_id)
       dispatch(setTableSuccess(cardsResponse.data.cards))
-    dispatch(setTokenSuccess(cardsResponse.data.token))
-    localStorageApi.setToken(cardsResponse.data.token)
-    }else{
+      dispatch(setTokenSuccess(cardsResponse.data.token))
+      localStorageApi.setToken(cardsResponse.data.token)
+    } else {
       dispatch(setError('Some ERROR'))
     }
-    
+
+  } catch (error) {
+    if (error.response) {
+      dispatch(setError(error.response.data.error))
+    } else {
+      dispatch(setError('Some ERROR'))
+    }
+  }
+}
+
+export const deleteCard = (id: string, cardsPack_id: string) => async (dispatch: Dispatch) => {
+  try {
+    let token = localStorageApi.getToken() || ''
+    let response = await tableCardsApi.deleteCard(token, id)
+    if (response.data.success) {
+      let cardsResponse = await tableCardsApi.getCards(response.data.token, cardsPack_id)
+      dispatch(setTableSuccess(cardsResponse.data.cards))
+      dispatch(setTokenSuccess(cardsResponse.data.token))
+      localStorageApi.setToken(cardsResponse.data.token)
+    } else {
+      dispatch(setError('Some ERROR'))
+    }
+
   } catch (error) {
     if (error.response) {
       dispatch(setError(error.response.data.error))
