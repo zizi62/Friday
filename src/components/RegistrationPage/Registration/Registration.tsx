@@ -45,6 +45,12 @@ const Registration: React.FC<RegistrationPropsType> = (props) => {
         >
             SIGN UP
         </Button >
+				<Button
+            onClick={signUp}
+            disabled={!!loading}
+        >
+            SIGN UP
+        </Button >
         <NavLink to={SIGN_IN_PATH}>SIGN IN</NavLink>
     </div>
 };
