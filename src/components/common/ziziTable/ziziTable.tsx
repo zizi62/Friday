@@ -26,8 +26,7 @@ const useStyles = makeStyles({
 type TablePropsType = {
   tableTitle: string
   tableData: Array<any>
-  link : string
-  linkButton:string
+  links?: Array<any>
   colums: Array<{
     title: string,
     field: string
@@ -35,14 +34,14 @@ type TablePropsType = {
   editItem: (pack: any) => void
   deletItem: (pack: any) => void
   searchItem: (text: any) => void
-  addNewItem : ()=>void
+  addNewItem: () => void
 }
 
 
 const TableZ: React.FC<TablePropsType> = (props: TablePropsType) => {
   const classes = useStyles();
 
-  const { tableData, tableTitle, colums, link,linkButton, addNewItem, editItem, deletItem, searchItem } = props
+  const { tableData, tableTitle, colums, addNewItem, editItem, deletItem, searchItem, links } = props
 
   const [searchText, setSearchText] = useState('')
 
@@ -65,7 +64,7 @@ const TableZ: React.FC<TablePropsType> = (props: TablePropsType) => {
   return (
     <TableContainer component={Paper}>
       <Typography>{tableTitle}</Typography>
-      <IconButton onClick = {addItem} ><AddBoxIcon color='primary' /></IconButton>
+      <IconButton onClick={addItem} ><AddBoxIcon color='primary' /></IconButton>
       <TextField id="standard-search" label="Search field" type="search" onChange={setSearch} /> <IconButton onClick={getSearchText}> <SearchIcon color='primary' /> </IconButton>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -87,7 +86,9 @@ const TableZ: React.FC<TablePropsType> = (props: TablePropsType) => {
               <TableCell component="th" scope="row" align="right">
                 <IconButton onClick={() => editItem(pack)}> <EditIcon color='primary' /> </IconButton>
                 <IconButton onClick={() => deletItem(pack)}><DeleteOutlineIcon color='primary' /></IconButton>
-                <NavLink  to={`${link}/${pack._id}`}><Button>{linkButton}</Button></NavLink>
+                {links? <> {links.map((link, i) => <NavLink to={`${link.link}/${pack._id}`} key={i}><Button>{link.buttonName}</Button></NavLink>)}</> : null}
+
+                {/* <NavLink  to={`${link}/${pack._id}`}><Button>{linkButton}</Button></NavLink> */}
               </TableCell>
             </TableRow>
           ))}

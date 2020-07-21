@@ -5,6 +5,8 @@ import { setTableData, setNewPackData, deletePack, packType } from "../../Redux/
 import TableZ from "../common/ziziTable/ziziTable";
 import React from "react";
 import { TABLE_ZIZICARDS } from "../Routes/Routes";
+import { NavLink } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 type ZiziPacksTablePropsType = {
 
@@ -29,7 +31,10 @@ const PacksTable: React.FC<ZiziPacksTablePropsType> = () => {
     { title: 'User name', field: 'user_name' },
     { title: 'Cards', field: 'cardsCount' }
   ]
-
+ const links = [
+  { buttonName: 'See cards', link: TABLE_ZIZICARDS },
+  { buttonName: 'Learn', link: TABLE_ZIZICARDS }
+ ]
   const editItem = (obj: any)=>{
     alert(obj.user_name)
   }
@@ -57,10 +62,8 @@ const PacksTable: React.FC<ZiziPacksTablePropsType> = () => {
     deletItem = {deletItem} 
     searchItem ={searchItem} 
     addNewItem = {addNewPack}
-    link ={TABLE_ZIZICARDS} 
-    linkButton = {'See Cards'}>
-
-    </TableZ>
+    links ={links} 
+   />
   </>
 }
 

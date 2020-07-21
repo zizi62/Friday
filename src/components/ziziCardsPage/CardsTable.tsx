@@ -5,7 +5,8 @@ import { setTableData, setNewCardData, deleteCard, cardType } from "../../Redux/
 import TableZ from "../common/ziziTable/ziziTable";
 import React from "react";
 import { TABLE_ZIZICARDS } from "../Routes/Routes";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 type ZiziCacksTablePropsType = {
 
@@ -55,11 +56,7 @@ const CardsTable: React.FC<ZiziCacksTablePropsType> = (props: any) => {
     }, [dispatch, setNewCardData]);
 
     return <>
-    
-        <TableZ tableData={tableData} colums={columns} tableTitle='Cards' editItem={editItem} deletItem={deletItem} searchItem={searchItem} addNewItem={addNewCard}
-            link={TABLE_ZIZICARDS}
-            linkButton={'Learn'}>
-        </TableZ>
+        <TableZ tableData={tableData} colums={columns} tableTitle='Cards' editItem={editItem} deletItem={deletItem} searchItem={searchItem} addNewItem={addNewCard}/>
     </>
 }
 
