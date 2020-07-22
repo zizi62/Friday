@@ -15,6 +15,7 @@ import { IconButton, Typography, TextField, ButtonGroup, Button } from '@materia
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { NavLink } from 'react-router-dom';
+import PaginationTable from '../../ziziCardsPage/PaginationTable/PaginationTable';
 
 const useStyles = makeStyles({
   table: {
@@ -92,6 +93,7 @@ const TableZ: React.FC<TablePropsType> = (props: TablePropsType) => {
             </TableRow>
           ))}
         </TableBody>
+				<PaginationTable />
       </Table>
     </TableContainer>
   );
