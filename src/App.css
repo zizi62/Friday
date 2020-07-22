@@ -2,7 +2,8 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: stretch ;
+	align-items: stretch ;
+	position: relative;
 }
 
 .App-logo {

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { setTableData } from "../../Redux/ziziPacksReducer";
 import TableZ from "../common/ziziTable/ziziTable";
 import React from "react";
+import { modalWindow } from "../../Redux/modalReducer";
 
 type ZiziPacksTablePropsType = {
 
@@ -30,7 +31,8 @@ const PacksTable: React.FC<ZiziPacksTablePropsType> = () => {
   ]
 
   const editItem = (obj: any)=>{
-    alert(obj.user_name)
+		//alert( "obj.user_name")
+		dispatch(modalWindow)
   }
 
   const deletItem = (obj: any)=>{
@@ -44,8 +46,13 @@ const PacksTable: React.FC<ZiziPacksTablePropsType> = () => {
 
 
   return <>
-    <TableZ tableData={tableData} colums = {columns} tableTitle='Packs' editItem={editItem} deletItem =  {deletItem} searchItem = {searchItem}>
-
+		<TableZ 
+			tableData={tableData}
+			colums = {columns}
+			tableTitle='Packs'
+			editItem={editItem}
+			deletItem =  {deletItem}
+			searchItem = {searchItem}>
     </TableZ>
   </>
 }

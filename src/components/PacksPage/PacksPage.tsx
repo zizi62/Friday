@@ -54,7 +54,7 @@ const useStyles = makeStyles({
 const PacksPage = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const packs = useSelector((state: AppStateType) => state.cardPacks.packs);
+    //const packs = useSelector((state: AppStateType) => state.cardPacks.packs);
 
     useEffect(() => {
         dispatch(getPacks())

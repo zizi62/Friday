@@ -61,13 +61,7 @@ const  setError = (error: string): setErrorActionType=>({type : SET_ERROR, error
 export const setProfile= () => async (dispatch: Dispatch,  getState: () => AppStateType) =>{
   
   try {
-<<<<<<< HEAD
-    let token = getToken()
-    token = '7c14aed0-b8f5-11ea-82a5-e1ef009c6bcd'
-    if(token) {
-=======
     let token = getState().profilePage.token
->>>>>>> 29348944542424df447e086e48fae9acad02bf11
       let response = await profileApi.getProfile(token)
         dispatch(setProfileSuccess(response.data))
         dispatch(setTokenSuccess(response.data.token))
