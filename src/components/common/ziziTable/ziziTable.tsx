@@ -87,8 +87,6 @@ const TableZ: React.FC<TablePropsType> = (props: TablePropsType) => {
                 <IconButton onClick={() => editItem(pack)}> <EditIcon color='primary' /> </IconButton>
                 <IconButton onClick={() => deletItem(pack)}><DeleteOutlineIcon color='primary' /></IconButton>
                 {links? <> {links.map((link, i) => <NavLink to={`${link.link}/${pack._id}`} key={i}><Button>{link.buttonName}</Button></NavLink>)}</> : null}
-
-                {/* <NavLink  to={`${link}/${pack._id}`}><Button>{linkButton}</Button></NavLink> */}
               </TableCell>
             </TableRow>
           ))}

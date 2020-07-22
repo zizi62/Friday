@@ -8,6 +8,7 @@ import ProfilePage from '../ProfilePage/ProfilePage';
 import PacksTable from '../ziziPacksPage/PacksTable';
 import TableCards from './../table/TableCards';
 import CardsTable from '../ziziCardsPage/CardsTable';
+import LearnPage from '../LearnPage/LearnPage';
 
 
 export const SIGN_IN_PATH = '/';
@@ -18,6 +19,7 @@ export const PROFILE_PATH = '/profile';
 export const TABLE_CARDS = '/cards';
 export const TABLE_ZIZIPARDS = '/ziziPacks'
 export const TABLE_ZIZICARDS = '/ziziCards/'
+export const LEARN = '/learn'
 
 const Routes: React.FC = () => {
 	return (
@@ -30,6 +32,8 @@ const Routes: React.FC = () => {
 			<Route path={TABLE_CARDS} component={TableCards} />
 			<Route path={TABLE_ZIZIPARDS} component={PacksTable} />
 			<Route path={`${TABLE_ZIZICARDS}/:id?`} component={CardsTable} />
+			<Route path = {`${LEARN}/:id`} component = {LearnPage}/>
+
 
 		</>
 	);

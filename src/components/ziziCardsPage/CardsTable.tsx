@@ -12,7 +12,7 @@ type ZiziCacksTablePropsType = {
 
 }
 
-const CardsTable: React.FC<ZiziCacksTablePropsType> = (props: any) => {
+const CardsTable: React.FC<ZiziCacksTablePropsType> = (props: ZiziCacksTablePropsType) => {
 
     const tableData = useSelector((store: AppStateType) => store.tableCardsReducer.cards);
 
