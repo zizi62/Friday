@@ -26,20 +26,17 @@ const CardsTable: React.FC<ZiziCacksTablePropsType> = (props: ZiziCacksTableProp
 
     const columns = [
         { title: 'Type', field: 'type' },
+        {title: 'cardQuestion', field: 'Question'},
         { title: 'Created', field: 'created' },
         { title: 'Rating', field: 'rating' },
         { title: 'Shots', field: 'shots' },
-        {title: 'Grade', field: 'grade'}
+  
     ]
 
     const editItem = (obj: any) => {
         alert(obj.user_name)
     }
 
-    // const deletItem = (obj: any) => {
-    //     deleteCard
-    //     alert(obj._id)
-    // }
 
     const deletItem = useCallback((card: cardType) => {
         dispatch(deleteCard(card._id, id))
