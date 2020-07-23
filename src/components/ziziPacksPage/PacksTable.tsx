@@ -31,7 +31,8 @@ const PacksTable: React.FC<ZiziPacksTablePropsType> = () => {
   ]
 
   const editItem = (obj: any)=>{
-		//alert( "obj.user_name")
+		debugger
+		alert( "obj.user_name")
 		dispatch(modalWindow)
   }
 
