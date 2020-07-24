@@ -30,8 +30,8 @@ export type cardPacksType = Array<packType>
 const initialState = {
   cardPacks: [] as cardPacksType,
   error: '',
-  pageCount: 0,
-  page: 0,
+  pageCount: 20,
+  page: 1,
   token: 0,
   pack: {
     _id: '',
@@ -90,9 +90,11 @@ const setError = (error: string): setErrorActionType => ({ type: SET_ERROR, erro
 
 
 export const setTableData = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
+  let pageCount = getState().tablePakcsPage.pageCount
+  let page = getState().tablePakcsPage.page
   try {
     let token = localStorageApi.getToken() || ''
-    let response = await tablePacksApi.getTable(token)
+    let response = await tablePacksApi.getTable(token, pageCount, page )
     dispatch(setTableSuccess(response.data.cardPacks))
     dispatch(setTokenSuccess(response.data.token))
     localStorageApi.setToken(response.data.token)
@@ -106,11 +108,13 @@ export const setTableData = () => async (dispatch: Dispatch, getState: () => App
 }
 
 export const setNewPackData = () => async (dispatch: Dispatch, getState: () => AppStateType) => {
+  let pageCount = getState().tablePakcsPage.pageCount
+  let page = getState().tablePakcsPage.page
   try {
     let token = localStorageApi.getToken() || ''
     let response = await tablePacksApi.setNewPack({name: 'ziziPack'}, token)
     if(response.data.success){
-      let packsResponse = await tablePacksApi.getTable(response.data.token)
+      let packsResponse = await tablePacksApi.getTable(response.data.token, pageCount, page )
       dispatch(setTableSuccess(packsResponse.data.cardPacks))
       localStorageApi.setToken(packsResponse.data.token)
       dispatch(setTokenSuccess(response.data.token))
@@ -126,12 +130,14 @@ export const setNewPackData = () => async (dispatch: Dispatch, getState: () => A
   }
 }
 
-export const deletePack=(id: string)=> async (dispatch: Dispatch) => {
+export const deletePack=(id: string)=> async (dispatch: Dispatch, getState: () => AppStateType) => {
+  let pageCount = getState().tablePakcsPage.pageCount
+  let page = getState().tablePakcsPage.page
   try {
     let token = localStorageApi.getToken() || ''
     let response = await tablePacksApi.deletePack(token, id)
     if(response.data.success){
-      let packsResponse = await tablePacksApi.getTable(response.data.token)
+      let packsResponse = await tablePacksApi.getTable(response.data.token, pageCount, page )
       dispatch(setTableSuccess(packsResponse.data.cardPacks))
       localStorageApi.setToken(packsResponse.data.token)
       dispatch(setTokenSuccess(response.data.token))

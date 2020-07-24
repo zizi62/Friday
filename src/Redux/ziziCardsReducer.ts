@@ -100,7 +100,6 @@ const setError = (error: string): setErrorActionType => ({ type: SET_ERROR, erro
 
 export const setTableData = (cardsPack_id: string) => async (dispatch: Dispatch, getState: () => AppStateType) => {
   try {
-    debugger
     let token = localStorageApi.getToken() || ''
     let response = await tableCardsApi.getCards(token, cardsPack_id)
     dispatch(setTableSuccess(response.data.cards))
@@ -118,7 +117,6 @@ export const setNewCardData = (cardsPack_id: string) => async (dispatch: Dispatc
 
   try {
     let token = localStorageApi.getToken() || ''
-    debugger
     let response = await tableCardsApi.setNewCard({ cardsPack_id: cardsPack_id, type: 'ziziCards' }, token);
     if (response.data.success) {
       let cardsResponse = await tableCardsApi.getCards(response.data.token, cardsPack_id)

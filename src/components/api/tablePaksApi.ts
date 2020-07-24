@@ -17,8 +17,8 @@ type getTableDataType = {
 type getTableType =  getTableDataType & {error: string}&{success: boolean, token:string}
 
 export const tablePacksApi = {   
-         async getTable(token: string) {
-             return await instance.get<getTableType>( `/cards/pack?token=${token}`)
+         async getTable(token: string, pageCount: number, page: number) {
+             return await instance.get<getTableType>( `/cards/pack?token=${token}&pageCount=${pageCount}&page=${page}`)
         },   
         async setNewPack(cardsPack: {}, token:string){
             debugger
