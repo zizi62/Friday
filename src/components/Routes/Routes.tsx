@@ -32,7 +32,7 @@ const Routes: React.FC = () => {
 			<Route path={TABLE_CARDS} component={TableCards} />
 			<Route path={TABLE_ZIZIPARDS} component={PacksTable} />
 			<Route path={`${TABLE_ZIZICARDS}/:id?`} component={CardsTable} />
-			<Route path = {`${LEARN}/:id`} component = {LearnPage}/>
+			<Route path = {`${LEARN}/:id?`} component = {LearnPage}/>
 
 
 		</>

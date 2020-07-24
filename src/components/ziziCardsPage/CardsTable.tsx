@@ -26,7 +26,7 @@ const CardsTable: React.FC<ZiziCacksTablePropsType> = (props: ZiziCacksTableProp
 
     const columns = [
         { title: 'Type', field: 'type' },
-        {title: 'cardQuestion', field: 'Question'},
+        {title: 'Question', field: 'question'},
         { title: 'Created', field: 'created' },
         { title: 'Rating', field: 'rating' },
         { title: 'Shots', field: 'shots' },
